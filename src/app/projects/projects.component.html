@@ -1,0 +1,19 @@
+<div class="p-4">
+  <p>Hey yo! Want some custom stuff made? We got ya, bitches!! In other words, put some proper words in here that sound
+  actually professional.....</p>
+</div>
+<div class="row">
+<div *ngFor="let project of projects" class="card col-md-4 col-sm-6 col-lg-3 m-1" style="width: 18rem;">
+  <img class="card-img-top" src="assets/img/placeholder.jpg" alt="Card image cap">
+
+  <div  class="card-body">
+    <h5 class="card-title">{{project.title}}</h5><img *ngIf="project.type=='knitting'" src="assets/img/knitting.svg" class="icon">
+    <img *ngIf="project.type=='sewing'" src="assets/img/suit.svg" class="icon">
+    <p class="card-text">{{project.description}}</p>
+
+    <a href="#" class="btn btn-dark">See more details</a>
+  </div>
+</div>
+</div>
+
+<!--<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"                 title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>-->
