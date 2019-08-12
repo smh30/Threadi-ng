@@ -13,7 +13,7 @@ export class NewProjectComponent implements OnInit {
     title: '',
     description: '',
     type: '',
-    client: {
+    creator: {
       "name": "Test Add",
       "location": "Raglan",
       "email": "auto@test.com"
@@ -48,5 +48,5 @@ export interface newProjectVM {
   title: string;
   description: string;
   type: string;
-  client: any;
+  creator: any;
 }

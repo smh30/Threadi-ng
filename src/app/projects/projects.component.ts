@@ -33,4 +33,18 @@ projects: Project[] = [];
 
   }
 
+  public deleteProject(project: Project){
+
+    let url = "http://localhost:8082/listings/delete/"+ project.projectID;
+    this.http.delete<Project[]>(url).subscribe(
+      res => {
+          this.projects = res;
+      },
+      err => {
+        alert("an error occurred while deleting the project")
+      }
+    )
+
+  }
+
 }

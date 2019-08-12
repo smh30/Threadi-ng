@@ -1,7 +1,7 @@
 import {User} from "./user";
 
 export interface Project {
-  id: string;
+  projectID: number;
   title: string
   description: string;
   type: string;
