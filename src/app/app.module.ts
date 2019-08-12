@@ -9,6 +9,9 @@ import {Router, RouterModule, Routes} from "@angular/router";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule} from "@angular/common/http";
 import { NewProjectComponent } from './new-project/new-project.component';
+import { HeroFormComponent } from './hero-form/hero-form.component';
+import { FormsModule} from "@angular/forms";
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes : Routes = [
   //this is the route to each of the components
@@ -26,6 +29,10 @@ const appRoutes : Routes = [
     component: ProjectsComponent,
     pathMatch: 'full'
   },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  },
   //and this is for page not found
   {
     path: '**',
@@ -39,14 +46,17 @@ const appRoutes : Routes = [
     NavComponent,
     ProjectsComponent,
     NotFoundComponent,
-    NewProjectComponent
+    NewProjectComponent,
+    HeroFormComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     NgbCollapseModule,
     //this one is so that the routes are actually connected
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
