@@ -14,9 +14,9 @@ export class NewProjectComponent implements OnInit {
     description: '',
     type: '',
     creator: {
-      "name": "Test Add",
-      "location": "Raglan",
-      "email": "auto@test.com"
+      "name": "",
+      "location": "",
+      "email": ""
     }
   };
 

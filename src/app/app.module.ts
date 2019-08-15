@@ -9,9 +9,10 @@ import {Router, RouterModule, Routes} from "@angular/router";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule} from "@angular/common/http";
 import { NewProjectComponent } from './new-project/new-project.component';
-import { HeroFormComponent } from './hero-form/hero-form.component';
+
 import { FormsModule} from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
+import { SearchComponent } from './search/search.component';
 
 const appRoutes : Routes = [
   //this is the route to each of the components
@@ -47,8 +48,8 @@ const appRoutes : Routes = [
     ProjectsComponent,
     NotFoundComponent,
     NewProjectComponent,
-    HeroFormComponent,
-    ProfileComponent
+    ProfileComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
