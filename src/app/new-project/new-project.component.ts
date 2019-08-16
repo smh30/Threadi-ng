@@ -9,6 +9,8 @@ import {HttpClient} from "@angular/common/http";
 })
 export class NewProjectComponent implements OnInit {
 
+  selectedImageFile: File = null;
+
   model: newProjectVM = {
     title: '',
     description: '',
@@ -28,17 +30,43 @@ export class NewProjectComponent implements OnInit {
   ngOnInit() {
   }
 
+  //todo return the id of the new project
   onSubmit(): void {
-    alert(this.model.type);
+    //alert(this.model.type);
     let url = "http://localhost:8082/listings/create";
     this.http.post(url, this.model).subscribe(
       res => {
-        location.reload();
+        this.uploadImageFile();
+        //location.reload();
       },
       err => {
         alert("an error has occurred while adding project")
       }
     );
+  }
+
+  //https://www.youtube.com/watch?v=YkvqLNcJz3Y
+  //todo fix the url once the backend is built
+
+
+  onImageSelect(event): void {
+    console.log(event);
+    this.selectedImageFile = event.target.files[0];
+  }
+
+  uploadImageFile(): void{
+    alert("image method to upload: " + this.selectedImageFile.name);
+    //const fd = new FormData();
+    //fd.append("image", this.selectedImageFile, this.selectedImageFile.name);
+    this.http.post('http://localhost:8082', this.selectedImageFile).subscribe(
+      res =>{
+        alert('boom, image');
+      },
+      err =>{
+        alert('an error occurred with image upload');
+      }
+    )
+
   }
 
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Project} from "./model/project";
+
 
 @Component({
   selector: 'app-projects',
@@ -9,7 +10,9 @@ import {Project} from "./model/project";
 })
 export class ProjectsComponent implements OnInit {
 
+
 projects: Project[] = [];
+searchText: string = "";
 
 
   constructor(private http: HttpClient) {
@@ -45,6 +48,11 @@ projects: Project[] = [];
       }
     )
 
+  }
+
+  public filterProjects(searchText:string){
+    alert("filteringby: "+ searchText);
+    this.searchText = searchText;
   }
 
 }

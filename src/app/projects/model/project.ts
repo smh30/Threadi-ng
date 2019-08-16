@@ -7,6 +7,7 @@ export interface Project {
   type: string;
   creator: User;
 
+
   // constructor(
   //   id: string,
   //   title: string,

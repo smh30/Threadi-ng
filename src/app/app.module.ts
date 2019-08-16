@@ -13,6 +13,7 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { FormsModule} from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
+import { FilterProjectsPipe } from './shared/filter-projects.pipe';
 
 const appRoutes : Routes = [
   //this is the route to each of the components
@@ -49,7 +50,8 @@ const appRoutes : Routes = [
     NotFoundComponent,
     NewProjectComponent,
     ProfileComponent,
-    SearchComponent
+    SearchComponent,
+    FilterProjectsPipe
   ],
   imports: [
     BrowserModule,

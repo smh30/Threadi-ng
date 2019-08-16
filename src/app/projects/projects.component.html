@@ -1,9 +1,11 @@
+
 <div class="p-4">
   <p>Threadi connects people looking for handcrafted clothing with creators with the skills to make their dreams come true!</p>
-  <app-search></app-search>
+  <app-search (searchEvent)="filterProjects($event)"></app-search>
 </div>
 <div class="row">
-<div *ngFor="let project of projects" class="card col-md-4 col-sm-6 col-lg-3 m-1" style="width: 18rem;">
+  <!--todo add an 'if no projects' message-->
+<div *ngFor="let project of projects | filterProjects:searchText" class="card col-md-4 col-sm-6 col-lg-3 m-1" style="width: 18rem;">
   <img class="card-img-top" src="assets/img/placeholder.jpg" alt="Card image cap">
 
   <div  class="card-body">
