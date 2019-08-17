@@ -28,6 +28,10 @@ searchText: string = "";
     this.http.get<Project[]>(url).subscribe(
       res => {
         this.projects = res;
+        // this.projects.forEach(p => {
+        //   console.log("this project name: "+ p.title);
+        //   console.log("this project image: " +p.projectImage);
+        // })
       },
       err => {
         alert("an error occured while getting project listings")

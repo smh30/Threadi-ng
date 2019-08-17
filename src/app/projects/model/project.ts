@@ -6,6 +6,7 @@ export interface Project {
   description: string;
   type: string;
   creator: User;
+  projectImage: File;
 
 
   // constructor(

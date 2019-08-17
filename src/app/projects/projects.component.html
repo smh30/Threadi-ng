@@ -6,8 +6,9 @@
 <div class="row">
   <!--todo add an 'if no projects' message-->
 <div *ngFor="let project of projects | filterProjects:searchText" class="card col-md-4 col-sm-6 col-lg-3 m-1" style="width: 18rem;">
-  <img class="card-img-top" src="assets/img/placeholder.jpg" alt="Card image cap">
 
+  <img *ngIf="project.projectImage!=null" class="card-img-top" src="data:image/png;base64,{{project.projectImage}}" alt="Project image">
+  <img *ngIf="project.projectImage==null" class="card-img-top" src="assets/img/placeholder.jpg" alt="Default project image">
   <div  class="card-body">
     <h5 class="card-title">{{project.title}}</h5>
     <p class="card-text">{{project.creator.name}}, {{project.creator.location}}</p>

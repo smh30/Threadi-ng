@@ -22,6 +22,7 @@ export class NewProjectComponent implements OnInit {
     }
   };
 
+
   constructor(private http: HttpClient) {
 
   }
@@ -34,9 +35,10 @@ export class NewProjectComponent implements OnInit {
   onSubmit(): void {
     //alert(this.model.type);
     let url = "http://localhost:8082/listings/create";
-    this.http.post(url, this.model).subscribe(
+    this.http.post<Project>(url, this.model).subscribe(
       res => {
-        this.uploadImageFile();
+//todo image can probs be uploaded together with the rest, once i've figured it out
+        this.uploadImageFile(res.projectID);
         //location.reload();
       },
       err => {
@@ -54,13 +56,17 @@ export class NewProjectComponent implements OnInit {
     this.selectedImageFile = event.target.files[0];
   }
 
-  uploadImageFile(): void{
-    alert("image method to upload: " + this.selectedImageFile.name);
-    //const fd = new FormData();
-    //fd.append("image", this.selectedImageFile, this.selectedImageFile.name);
-    this.http.post('http://localhost:8082', this.selectedImageFile).subscribe(
+
+  //went from 404, 405, 415, 400, eventually worked!
+  uploadImageFile(projectId:number): void{
+    alert("image method to upload: " + this.selectedImageFile.name +", to ProjectId "+ projectId);
+
+    const fd = new FormData();
+    fd.append("file", this.selectedImageFile, this.selectedImageFile.name);
+
+    this.http.post<Project>('http://localhost:8082/listings/'+projectId+"/addImage", fd).subscribe(
       res =>{
-        alert('boom, image');
+        alert('boom, image,' + res);
       },
       err =>{
         alert('an error occurred with image upload');
