@@ -14,6 +14,9 @@ import { FormsModule} from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { FilterProjectsPipe } from './shared/filter-projects.pipe';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import {AuthGuardService} from "./shared/auth-guard.service";
 
 const appRoutes : Routes = [
   //this is the route to each of the components
@@ -23,7 +26,8 @@ const appRoutes : Routes = [
   },
   {
     path: 'list-project',
-    component: NewProjectComponent
+    component: NewProjectComponent,
+    canActivate:[AuthGuardService]
   },
   //this one is the default
   {
@@ -33,13 +37,25 @@ const appRoutes : Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate:[AuthGuardService]
   },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent,
+    canActivate:[AuthGuardService]
+  },
+
   //and this is for page not found
   {
     path: '**',
     component: NotFoundComponent,
   }
+
 ];
 
 @NgModule({
@@ -51,7 +67,9 @@ const appRoutes : Routes = [
     NewProjectComponent,
     ProfileComponent,
     SearchComponent,
-    FilterProjectsPipe
+    FilterProjectsPipe,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

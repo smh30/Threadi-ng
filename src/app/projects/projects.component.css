@@ -3,3 +3,6 @@ img.icon {
   float: right;
 }
 
+.card-img-top {
+  height: 250px !important;
+}
