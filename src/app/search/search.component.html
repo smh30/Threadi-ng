@@ -1,0 +1,14 @@
+<form>
+  <label for="search">Search for projects</label>
+  <input type="text"
+         class="form-control"
+         id="search"
+         name="search"
+         [(ngModel)]="searchText"
+         />
+  <button type="submit"
+         class="btn btn-dark"
+         (click)="submitSearch()"
+        >Search</button>
+  <!--todo make this real time rather than requiring submit-->
+</form>
