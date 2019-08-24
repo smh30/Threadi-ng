@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Project} from "../projects/model/project";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-new-project',
@@ -16,7 +16,7 @@ export class NewProjectComponent implements OnInit {
     description: '',
     type: '',
     creator: {
-      "name": "",
+      "username": "",
       "location": "",
       "email": ""
     }
@@ -33,9 +33,16 @@ export class NewProjectComponent implements OnInit {
 
   //todo return the id of the new project
   onSubmit(): void {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        //'Content-Type': 'application/json',
+
+        "Authorization": "Basic " + btoa("bob:bob123")
+      })
+    };
     //alert(this.model.type);
-    let url = "http://localhost:8082/listings/create";
-    this.http.post<Project>(url, this.model).subscribe(
+    let url = "http://localhost:8082/projects";
+    this.http.post<Project>(url, this.model, httpOptions).subscribe(
       res => {
 //todo image can probs be uploaded together with the rest, once i've figured it out
         this.uploadImageFile(res.projectID);
@@ -64,7 +71,7 @@ export class NewProjectComponent implements OnInit {
     const fd = new FormData();
     fd.append("file", this.selectedImageFile, this.selectedImageFile.name);
 
-    this.http.post<Project>('http://localhost:8082/listings/'+projectId+"/addImage", fd).subscribe(
+    this.http.post<Project>('http://localhost:8082/projects/'+projectId+"/addImage", fd).subscribe(
       res =>{
         alert('boom, image,' + res);
       },

@@ -8,6 +8,9 @@ export class AuthenticationService {
   constructor() { }
 
   authenticate(username, password) {
+    //todo check if username exists
+    //if so , check if password is ok.
+    //or, does this whole thing pass to backend? if so, do I have to encrypt first?
     if (username === "hello" && password === "password") {
       sessionStorage.setItem('username', username);
       return true;
