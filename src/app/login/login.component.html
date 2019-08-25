@@ -1,9 +1,24 @@
 <div class="container">
-  <div>
-    User Name : <input type="text" name="username" [(ngModel)]="username">
-    Password : <input type="password" name="password" [(ngModel)]="password">
-  </div>
-  <button (click)=checkLogin() class="btn btn-success">
-    Login
-  </button>
+  <form [formGroup]="form">
+
+    <fieldset>
+      <legend>Login</legend>
+      <div class="form-field">
+        <label>Username:</label>
+        <input type="text" name="username" formControlName="username">
+      </div>
+      <div class="form-field">
+        <label>Password:</label>
+        <input type="password" name="password" formControlName="password">
+      </div>
+    </fieldset>
+    <div class="form-buttons">
+      <button class="button btn btn-primary"
+              (click)="login()">Login</button>
+    </div>
+
+
+
+  </form>
+
 </div>

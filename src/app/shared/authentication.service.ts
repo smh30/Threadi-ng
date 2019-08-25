@@ -1,36 +1,60 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {User} from "../projects/model/user";
+import * as moment from "moment";
+import {tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthService {
 
-  constructor() { }
-
-  authenticate(username, password) {
-    //todo check if username exists
-    //if so , check if password is ok.
-    //or, does this whole thing pass to backend? if so, do I have to encrypt first?
-    if (username === "hello" && password === "password") {
-      sessionStorage.setItem('username', username);
-      return true;
-    } else {
-      return false;
-    }
+  constructor(private http: HttpClient) {
   }
 
-  isUserLoggedIn() {
-    let user:string = sessionStorage.getItem('username');
-    console.log(!(user === null));
-    return !(user === null)
+  //We are calling shareReplay to prevent the receiver of this Observable from accidentally triggering multiple POST requests due to multiple subscriptions.
+  //https://blog.angular-university.io/angular-jwt-authentication/
+  login(username:string, password:string){
+    let url = 'https://localhost:8443/login';
+    return this.http.post<User>(url, {username, password})
+      .pipe(tap(res => this.setSession(res)));
+
+
+
+
   }
 
-  loggedInUser(){
-    let user: string = sessionStorage.getItem('username');
+  private setSession(authResult){
+    const expiresAt = moment().add(authResult.expiresIn,'second');
+
+    localStorage.setItem('id_token', authResult.token);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+
+  }
+
+  logout(){
+    localStorage.removeItem("id_token");
+    localStorage.removeItem(("expires_at"));
+  }
+
+  public isLoggedIn() {
+    return moment().isBefore(this.getExpiration());
+  }
+
+  isLoggedOut(){
+    return !this.isLoggedIn();
+  }
+
+  getExpiration(){
+    const expiration = localStorage.getItem("expires_at");
+    const expiresAt = JSON.parse(expiration);
+    return moment(expiresAt);
+  }
+
+  getLoggedInUser(){
+    const user = localStorage.getItem("username");
     return user;
   }
 
-  logOut() {
-    sessionStorage.removeItem('username')
-  }
+
 }

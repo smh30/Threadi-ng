@@ -35,18 +35,12 @@ searchText: string = "";
 
 
   public getAllProjects(){
-    let url = "https://localhost:8443/projects";
-    //alert(btoa("bob:bob123"));
-    const httpOptions = {
-      headers: new HttpHeaders({
-        //'Content-Type': 'application/json',
+    let url = "https://localhost:8443/projects/";
 
-        "Authorization": "Basic " + btoa("bob:bob123")
-      })
-    };
+
 
     //alert(httpOptions.headers.get("Authorization").toString());
-    this.http.get<Project[]>(url, httpOptions).subscribe(
+    this.http.get<Project[]>(url).subscribe(
       res => {
         this.projects = res;
         this.projects.forEach(p => {
@@ -59,19 +53,13 @@ searchText: string = "";
         alert("an error occured while getting project listings")
       }
     );
-
+//edit edit
   }
 
   public deleteProject(project: Project){
-    const httpOptions = {
-      headers: new HttpHeaders({
-        //'Content-Type': 'application/json',
 
-        "Authorization": "Basic " + btoa("bob:bob123")
-      })
-    };
-    let url = "https://localhost:8443/projects/"+ project.projectID;
-    this.http.delete<Project[]>(url, httpOptions).subscribe(
+    let url = "https://localhost:8443/projects/"+ project.projectID +"/";
+    this.http.delete<Project[]>(url).subscribe(
       res => {
           this.projects = res;
       },
