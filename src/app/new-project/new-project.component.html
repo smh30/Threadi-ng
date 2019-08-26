@@ -36,33 +36,19 @@
            [(ngModel)]="model.type">
 
   </div>
-  <div class="form-group">
-    <label for="name">Your name:</label>
-    <input type="text"
-           id="name"
-           class="form-control"
-           [(ngModel)]="model.creator.name"
-           name="name"
-    />
-  </div>
+
+
   <div class="form-group">
     <label for="location">Your location:</label>
     <input type="text"
            id="location"
            class="form-control"
            [(ngModel)]="model.creator.location"
-           name="location"
-    />
+           name="location"/>
+
   </div>
-  <div class="form-group">
-    <label for="email">Your email address:</label>
-    <input type="email"
-           id="email"
-           class="form-control"
-           [(ngModel)]="model.creator.email"
-           name="email"
-    />
-  </div>
+
+
   <input type="file" (change)="onImageSelect($event)">
 
   <button type="submit" class="btn btn-success">

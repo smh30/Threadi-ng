@@ -14,25 +14,26 @@ export class AuthService {
 
   //We are calling shareReplay to prevent the receiver of this Observable from accidentally triggering multiple POST requests due to multiple subscriptions.
   //https://blog.angular-university.io/angular-jwt-authentication/
-  login(username:string, password:string){
+  login(username: string, password: string) {
     let url = 'https://localhost:8443/login';
     return this.http.post<User>(url, {username, password})
-      .pipe(tap(res => this.setSession(res)));
+      .pipe(tap(res => {
+        this.setSession(res);
 
-
+      }));
 
 
   }
 
-  private setSession(authResult){
-    const expiresAt = moment().add(authResult.expiresIn,'second');
+  private setSession(authResult) {
+    const expiresAt = moment().add(authResult.expiresIn, 'second');
 
     localStorage.setItem('id_token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
 
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem("id_token");
     localStorage.removeItem(("expires_at"));
   }
@@ -41,17 +42,17 @@ export class AuthService {
     return moment().isBefore(this.getExpiration());
   }
 
-  isLoggedOut(){
+  isLoggedOut() {
     return !this.isLoggedIn();
   }
 
-  getExpiration(){
+  getExpiration() {
     const expiration = localStorage.getItem("expires_at");
     const expiresAt = JSON.parse(expiration);
     return moment(expiresAt);
   }
 
-  getLoggedInUser(){
+  getLoggedInUser() {
     const user = localStorage.getItem("username");
     return user;
   }

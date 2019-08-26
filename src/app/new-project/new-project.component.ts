@@ -13,15 +13,16 @@ export class NewProjectComponent implements OnInit {
   selectedImageFile: File = null;
   //authService: AuthService;
 
-  model: newProjectVM = {
+  model = {
     title: '',
     description: '',
     type: '',
-    creator: {
-      "username": this.authService.getLoggedInUser(),
-      "location": "here",
-      "email": "email@email"
-    }
+    newCreatorId: localStorage.getItem("userId")
+    // creator: {
+    //   "username": this.authService.getLoggedInUser(),
+    //   "location": "here",
+    //   "email": "email@email"
+    // }
   };
 
 
@@ -86,5 +87,5 @@ export interface newProjectVM {
   title: string;
   description: string;
   type: string;
-  creator: any;
+  //creator: any;
 }

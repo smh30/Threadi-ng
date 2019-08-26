@@ -17,6 +17,8 @@ import { FilterProjectsPipe } from './shared/filter-projects.pipe';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor} from "./shared/auth-interceptor";
 import { RegisterComponent } from './register/register.component';
+import { LogoutComponent } from './logout/logout.component';
+
 
 const appRoutes : Routes = [
   //this is the route to each of the components
@@ -31,6 +33,10 @@ const appRoutes : Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutComponent
   },
   //this one is the default
   {
@@ -68,6 +74,7 @@ const appRoutes : Routes = [
     FilterProjectsPipe,
     LoginComponent,
     RegisterComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

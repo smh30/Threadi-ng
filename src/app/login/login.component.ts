@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService} from '../shared/authentication.service';
 import {FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {LoginServiceService} from "../shared/login-service.service";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
 
   constructor(private fb:FormBuilder,
               private authService: AuthService,
-              private router: Router){
+              private router: Router,
+              private loginService: LoginServiceService){
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -29,6 +31,7 @@ export class LoginComponent {
       this.authService.login(val.username, val.password).subscribe(
         () => {
           localStorage.setItem('username', val.username);
+this.loginService.storeUserId(val.username);
           console.log("User is logged in");
           this.router.navigateByUrl('/');
         }
