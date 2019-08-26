@@ -11,7 +11,7 @@
   <img *ngIf="project.projectImage==null" class="card-img-top" src="assets/img/placeholder.jpg" alt="Default project image">
   <div  class="card-body">
     <h5 class="card-title">{{project.title}}</h5>
-    <p class="card-text">{{project.creator.name}}, {{project.creator.location}}</p>
+    <p class="card-text">{{project.creator.username}}, {{project.creator.userId}}</p>
     <img *ngIf="project.type=='knitting'" src="assets/img/knitting.svg" class="icon">
     <img *ngIf="project.type=='sewing'" src="assets/img/suit.svg" class="icon">
     <p class="card-text">{{project.description}}</p>

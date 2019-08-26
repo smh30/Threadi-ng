@@ -11,22 +11,22 @@
         <a class="nav-link" routerLink="/projects">Projects <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/list-project">List a Project</a>
+        <a  class="nav-link"  *ngIf="loginService.isLoggedIn()"  routerLink="/list-project">List a Project</a>
       </li>
       <li class="nav-item">
-        <a *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/profile">Profile</a>
+        <a  class="nav-link" *ngIf="loginService.isLoggedIn()"  routerLink="/profile">Profile</a>
       </li>
       <li class="nav-item">
-        <a *ngIf="!loginService.isUserLoggedIn()" class="nav-link" routerLink="/login">Login</a>
+        <a  class="nav-link" *ngIf="!loginService.isLoggedIn()"  routerLink="/login">Login</a>
       </li>
       <li class="nav-item">
-        <a *ngIf="loginService.isUserLoggedIn()" class="nav-link" routerLink="/logout">Logout</a>
+        <a  class="nav-link"  *ngIf="loginService.isLoggedIn()" routerLink="/logout">Logout</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">....</a>
       </li>
       <li class="nav-item">
-      <span *ngIf="loginService.isUserLoggedIn()" class="navbar-text">Logged in user= {{loginService.loggedInUser()}}</span>
+      <span  class="navbar-text">Logged in user= {{loginService.getLoggedInUser()}}</span>
       </li>
     </ul>
     <!--todo get nav to auto collapse when option selected-->

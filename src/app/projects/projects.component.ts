@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Project} from "./model/project";
 
 
@@ -15,34 +15,50 @@ projects: Project[] = [];
 searchText: string = "";
 
 
-  constructor(private http: HttpClient) {
 
+
+  constructor(private http: HttpClient) {
+    //https://stackoverflow.com/questions/50694913/angular-6-httpclient-passing-basic-auth-in-httpoptions/50696466
+    //todo figure out if the above link was actually helpful??
+    // var headers_object = new HttpHeaders();
+    // headers_object.append('Content-Type', 'application/json');
+    // headers_object.append("Authorization", "Basic " + btoa("username:password"))
+    // this.httpOptions = {
+    //   headers: headers_object
+    //}
   }
 
   ngOnInit() {
     this.getAllProjects();
   }
 
+
+
   public getAllProjects(){
-    let url = "http://localhost:8082/listings/all";
+    let url = "https://localhost:8443/projects/";
+
+
+
+    //alert(httpOptions.headers.get("Authorization").toString());
     this.http.get<Project[]>(url).subscribe(
       res => {
         this.projects = res;
-        // this.projects.forEach(p => {
-        //   console.log("this project name: "+ p.title);
-        //   console.log("this project image: " +p.projectImage);
-        // })
+        this.projects.forEach(p => {
+          console.log("this project name: "+ p.title);
+          console.log("this project desc: " +p.description);
+          console.log("creator:"+ p.creator.username)
+        })
       },
       err => {
         alert("an error occured while getting project listings")
       }
     );
-
+//edit edit
   }
 
   public deleteProject(project: Project){
 
-    let url = "http://localhost:8082/listings/delete/"+ project.projectID;
+    let url = "https://localhost:8443/projects/"+ project.projectID +"/";
     this.http.delete<Project[]>(url).subscribe(
       res => {
           this.projects = res;

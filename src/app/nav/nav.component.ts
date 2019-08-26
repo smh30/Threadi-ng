@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from "../shared/authentication.service";
+import {AuthService} from "../shared/authentication.service";
+
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,8 @@ import {AuthenticationService} from "../shared/authentication.service";
 export class NavComponent implements OnInit {
   public isCollapsed = true;
 
-  constructor(private loginService:AuthenticationService) { }
+  constructor(private loginService:AuthService) {
+  }
 
   ngOnInit() {
   }
