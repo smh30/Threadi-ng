@@ -16,6 +16,7 @@ import { SearchComponent } from './search/search.component';
 import { FilterProjectsPipe } from './shared/filter-projects.pipe';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor} from "./shared/auth-interceptor";
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes : Routes = [
   //this is the route to each of the components
@@ -26,6 +27,10 @@ const appRoutes : Routes = [
   {
     path: 'list-project',
     component: NewProjectComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   //this one is the default
   {
@@ -62,6 +67,7 @@ const appRoutes : Routes = [
     SearchComponent,
     FilterProjectsPipe,
     LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
