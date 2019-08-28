@@ -11,10 +11,14 @@ import {Project} from "./model/project";
 export class ProjectsComponent implements OnInit {
 
 
-projects: Project[] = [];
-searchText: string = "";
-
-
+  projects: Project[] = [];
+  // searchParams: object = {
+  //   searchText: "",
+  //   searchType: ""
+  // };
+searchType: string = "";
+searchText: string ="";
+  loggedInUser: string;
 
 
   constructor(private http: HttpClient) {
@@ -30,13 +34,12 @@ searchText: string = "";
 
   ngOnInit() {
     this.getAllProjects();
+    this.loggedInUser = localStorage.getItem("username");
   }
 
 
-
-  public getAllProjects(){
+  public getAllProjects() {
     let url = "https://localhost:8443/projects/";
-
 
 
     //alert(httpOptions.headers.get("Authorization").toString());
@@ -44,9 +47,11 @@ searchText: string = "";
       res => {
         this.projects = res;
         this.projects.forEach(p => {
-          console.log("this project name: "+ p.title);
-          console.log("this project desc: " +p.description);
-          console.log("creator:"+ p.creator.username)
+          console.log("this project name: " + p.title);
+          console.log("this project desc: " + p.description);
+          console.log("creator:" + p.creator.username);
+          console.log('logged in user: ' + this.loggedInUser);
+
         })
       },
       err => {
@@ -56,12 +61,12 @@ searchText: string = "";
 //edit edit
   }
 
-  public deleteProject(project: Project){
+  public deleteProject(project: Project) {
 
-    let url = "https://localhost:8443/projects/"+ project.projectID +"/";
+    let url = "https://localhost:8443/projects/" + project.projectID + "/";
     this.http.delete<Project[]>(url).subscribe(
       res => {
-          this.projects = res;
+        this.projects = res;
       },
       err => {
         alert("an error occurred while deleting the project")
@@ -70,9 +75,15 @@ searchText: string = "";
 
   }
 
-  public filterProjects(searchText:string){
-    alert("filteringby: "+ searchText);
+  public filterProjects(searchParams: object) {
+
+
+    let {searchType, searchText} = searchParams;
+    //alert("filteringby: " + searchText);
+
+    console.log("in projects.ts text = "+searchText, "type = "+ searchType);
     this.searchText = searchText;
+    this.searchType = searchType
   }
 
 }

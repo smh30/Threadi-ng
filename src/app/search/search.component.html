@@ -1,14 +1,37 @@
 <form>
+  <div class="form-group">
+    Filter projects by type:
+    <label for="knit">Knitting</label>
+    <input type="radio"
+           name="type"
+           id="knit"
+           value="knitting"
+           [(ngModel)]="searchParams.searchType"
+    >
+    <label for="sew">Sewing</label>
+    <input type="radio"
+           name="type"
+           id="sew"
+           value="sewing"
+           [(ngModel)]="searchParams.searchType">
+
+  </div>
+
+
   <label for="search">Search for projects</label>
   <input type="text"
          class="form-control"
          id="search"
          name="search"
-         [(ngModel)]="searchText"
+         [(ngModel)]="searchParams.searchText"
          />
   <button type="submit"
          class="btn btn-dark"
          (click)="submitSearch()"
         >Search</button>
+  <button type="button"
+          class="btn btn-dark"
+          (click)="clearParams()"
+  >Remove filter</button>
   <!--todo make this real time rather than requiring submit-->
 </form>

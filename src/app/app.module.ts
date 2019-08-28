@@ -13,11 +13,12 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
-import { FilterProjectsPipe } from './shared/filter-projects.pipe';
+import { FilterProjectsByTextPipe } from './shared/filter-projects-byText.pipe';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor} from "./shared/auth-interceptor";
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
+import { FilterProjectsByTypePipe } from './shared/filter-projects-by-type.pipe';
 
 
 const appRoutes : Routes = [
@@ -71,10 +72,11 @@ const appRoutes : Routes = [
     NewProjectComponent,
     ProfileComponent,
     SearchComponent,
-    FilterProjectsPipe,
+    FilterProjectsByTextPipe,
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
+    FilterProjectsByTypePipe,
   ],
   imports: [
     BrowserModule,

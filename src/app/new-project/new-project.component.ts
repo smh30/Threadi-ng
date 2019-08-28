@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Project} from "../projects/model/project";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "../shared/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-project',
@@ -17,6 +18,7 @@ export class NewProjectComponent implements OnInit {
     title: '',
     description: '',
     type: '',
+    location: '',
     newCreatorId: localStorage.getItem("userId")
     // creator: {
     //   "username": this.authService.getLoggedInUser(),
@@ -26,7 +28,7 @@ export class NewProjectComponent implements OnInit {
   };
 
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
 
   }
 
@@ -43,8 +45,13 @@ console.log("posting new project form");
       res => {
 
 //todo image can probs be uploaded together with the rest, once i've figured it out
-        this.uploadImageFile(res.projectID);
+        if (this.selectedImageFile!=null){
+          console.log("image to uploadddd");
+        this.uploadImageFile(res.projectID);}
+
+        //todo redirect to show the newly uploaded project
         //location.reload();
+        this.router.navigateByUrl('/');
       },
       err => {
         alert("an error has occurred while adding project")
@@ -64,14 +71,14 @@ console.log("posting new project form");
 
   //went from 404, 405, 415, 400, eventually worked!
   uploadImageFile(projectId:number): void{
-    alert("image method to upload: " + this.selectedImageFile.name +", to ProjectId "+ projectId);
+    //alert("image method to upload: " + this.selectedImageFile.name +", to ProjectId "+ projectId);
 
     const fd = new FormData();
     fd.append("file", this.selectedImageFile, this.selectedImageFile.name);
 
-    this.http.post<Project>('http://localhost:8082/projects/'+projectId+"/addImage", fd).subscribe(
+    this.http.post<Project>('https://localhost:8443/projects/'+projectId+"/addImage", fd).subscribe(
       res =>{
-        alert('boom, image,' + res);
+        //alert('boom, image,' + res);
       },
       err =>{
         alert('an error occurred with image upload');
@@ -83,9 +90,4 @@ console.log("posting new project form");
 
 }
 
-export interface newProjectVM {
-  title: string;
-  description: string;
-  type: string;
-  //creator: any;
-}
+

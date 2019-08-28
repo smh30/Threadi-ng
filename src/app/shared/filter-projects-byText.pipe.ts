@@ -4,9 +4,9 @@ import {Project} from "../projects/model/project";
 @Pipe({
   name: 'filterProjects'
 })
-export class FilterProjectsPipe implements PipeTransform {
+export class FilterProjectsByTextPipe implements PipeTransform {
 
-  transform(projects: Project[], text: string): Project[] {
+  transform(projects: Project[], text: string, type:string): Project[] {
     if(text == null || text === ""){
       return projects;
     }

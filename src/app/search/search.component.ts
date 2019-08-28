@@ -8,29 +8,36 @@ import {HttpClient} from "@angular/common/http";
 })
 export class SearchComponent implements OnInit {
 
-  @Output() searchEvent:EventEmitter<string> = new EventEmitter<string>();
+  @Output() searchEvent: EventEmitter<object> = new EventEmitter<object>();
 
-  searchText: string;
+  //searchText: string;
+  //searchType: string;
+  searchParams = {
+    searchText: "",
+    searchType: ""
+  };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+
+  }
 
   ngOnInit() {
   }
 
-  submitSearch(){
+  submitSearch() {
     //alert("search submitted, text="+ this.searchText);
 
-    this.searchEvent.emit(this.searchText);
-    // let url="http://localhost:8082/listings/type/"+this.searchText;
-    // this.http.get(url).subscribe(
-    //   res=>{
-    //     alert(res);
-    //     //will need to do this in a service and do a notification when it changes
-    //   },
-    //   err=>{
-    //     alert("an error has occurred with search")
-    //   }
-    // )
+    console.log("in search type=" + this.searchParams.searchType + ", text  =" + this.searchParams.searchText);
+
+
+    this.searchEvent.emit(this.searchParams);
+
+  }
+
+  clearParams(){
+    this.searchParams.searchType ="";
+    this.searchParams.searchText ="";
+    this.searchEvent.emit(this.searchParams);
   }
 
 }
