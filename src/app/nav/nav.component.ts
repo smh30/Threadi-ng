@@ -9,11 +9,16 @@ import {AuthService} from "../shared/authentication.service";
 })
 export class NavComponent implements OnInit {
   public isCollapsed = true;
+  navbarOpen = false;
 
   constructor(private loginService:AuthService) {
   }
 
   ngOnInit() {
+  }
+
+  toggleNavbar(){
+    this.navbarOpen = !this.navbarOpen;
   }
 
 }

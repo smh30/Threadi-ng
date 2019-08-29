@@ -16,9 +16,17 @@
            [(ngModel)]="searchParams.searchType">
 
   </div>
+  <label for="location">Search by location</label>
+  <input type="text"
+         class="form-control"
+         id="location"
+         name="location"
+         [(ngModel)]="searchParams.searchLocation"
+  />
 
 
-  <label for="search">Search for projects</label>
+
+  <label for="search">Search by text</label>
   <input type="text"
          class="form-control"
          id="search"

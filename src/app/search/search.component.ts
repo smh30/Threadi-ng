@@ -14,7 +14,8 @@ export class SearchComponent implements OnInit {
   //searchType: string;
   searchParams = {
     searchText: "",
-    searchType: ""
+    searchType: "",
+    searchLocation: ""
   };
 
   constructor(private http: HttpClient) {
@@ -37,6 +38,7 @@ export class SearchComponent implements OnInit {
   clearParams(){
     this.searchParams.searchType ="";
     this.searchParams.searchText ="";
+    this.searchParams.searchLocation ="";
     this.searchEvent.emit(this.searchParams);
   }
 

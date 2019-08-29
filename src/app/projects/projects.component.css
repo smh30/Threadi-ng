@@ -5,6 +5,14 @@ img.icon {
 
 .card-img-top {
   height: 250px !important;
+  position: relative;
+top: 20px;
+}
+
+
+.threadi-card {
+ width: 33%;
+  outline: 1px solid crimson;
 }
 
 

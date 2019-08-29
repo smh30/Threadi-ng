@@ -18,6 +18,7 @@ export class ProjectsComponent implements OnInit {
   // };
 searchType: string = "";
 searchText: string ="";
+searchLocation: string ="";
   loggedInUser: string;
 
 
@@ -77,13 +78,15 @@ searchText: string ="";
 
   public filterProjects(searchParams: object) {
 
+    if (searchParams != {}) {
+      let {searchType, searchText, searchLocation} = searchParams;
+      //alert("filteringby: " + searchText);
 
-    let {searchType, searchText} = searchParams;
-    //alert("filteringby: " + searchText);
-
-    console.log("in projects.ts text = "+searchText, "type = "+ searchType);
-    this.searchText = searchText;
-    this.searchType = searchType
+      console.log("in projects.ts text = " + searchText, "type = " + searchType);
+      this.searchText = searchText;
+      this.searchType = searchType;
+      this.searchLocation = searchLocation;
+    }
   }
 
 }

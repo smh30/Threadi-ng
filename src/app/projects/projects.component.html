@@ -3,13 +3,13 @@
   <p>Threadi connects people looking for handcrafted clothing with creators with the skills to make their dreams come true!</p>
   <app-search (searchEvent)="filterProjects($event)"></app-search>
 </div>
-<div class="row">
+<div class="row p-4 clearfix">
   <!--todo add an 'if no projects' message-->
-<div *ngFor="let project of projects | filterProjectsByType: searchText: searchType" class="card col-md-4 col-sm-6 col-lg-3 m-1" style="width: 33%;">
+<div *ngFor="let project of projects | filterProjectsByType: searchText: searchType: searchLocation" class="threadi-card card col-md-4 col-sm-6 col-lg-3 m-1">
 
   <img *ngIf="project.projectImage!=null" class="card-img-top" src="data:image/png;base64,{{project.projectImage}}" alt="Project image">
   <img *ngIf="project.projectImage==null" class="card-img-top" src="assets/img/placeholder.jpg" alt="Default project image">
-  <div  class="card-body">
+  <div class="card-body">
     <h5 class="card-title">{{project.title}}</h5>
     <p class="card-text">{{project.creator.username}}, {{project.creator.userId}}</p>
     <img *ngIf="project.type==='knitting'" src="assets/img/knitting.svg" class="icon">

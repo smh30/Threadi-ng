@@ -7,7 +7,7 @@ import {Project} from "../projects/model/project";
 })
 export class FilterProjectsByTypePipe implements PipeTransform {
 
-  transform(projects: Project[], searchText: string, searchType: string): Project[] {
+  transform(projects: Project[], searchText: string, searchType: string, searchLocation: string): Project[] {
 
 
     console.log("in transform type="+ searchType +", text  ="+ searchText );
