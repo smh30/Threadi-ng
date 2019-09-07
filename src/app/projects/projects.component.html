@@ -1,26 +1,18 @@
-
 <div class="p-4">
-  <p>Threadi connects people looking for handcrafted clothing with creators with the skills to make their dreams come true!</p>
+  <p>Threadi connects people looking for handcrafted clothing with creators with the skills to make their dreams come
+    true!</p>
   <app-search (searchEvent)="filterProjects($event)"></app-search>
 </div>
-<div class="row p-4 clearfix">
+<div class="row p-4 ">
+  <!--project cards -->
+  <app-project *ngFor="let project of projects | filterProjectsByType: searchText: searchType: searchLocation"
+               [project]="project"
+               (projectDeleted)="deleteProject($event)"
+               class="col-md-4 col-sm-6 col-lg-3 ">
+
+  </app-project>
   <!--todo add an 'if no projects' message-->
-<div *ngFor="let project of projects | filterProjectsByType: searchText: searchType: searchLocation" class="threadi-card card col-md-4 col-sm-6 col-lg-3 m-1">
 
-  <img *ngIf="project.projectImage!=null" class="card-img-top" src="data:image/png;base64,{{project.projectImage}}" alt="Project image">
-  <img *ngIf="project.projectImage==null" class="card-img-top" src="assets/img/placeholder.jpg" alt="Default project image">
-  <div class="card-body">
-    <h5 class="card-title">{{project.title}}</h5>
-    <p class="card-text">{{project.creator.username}}, {{project.creator.userId}}</p>
-    <img *ngIf="project.type==='knitting'" src="assets/img/knitting.svg" class="icon">
-    <img *ngIf="project.type==='sewing'" src="assets/img/suit.svg" class="icon">
-    <p class="card-text">{{project.description}}</p>
-
-    <a href="#" class="btn btn-dark">See more details</a>
-    <a *ngIf="project.creator.username===loggedInUser"
-      href="#"  class="btn btn-warning" (click)="deleteProject(project)">Delete Project</a>
-  </div>
-</div>
 </div>
 
 <!--<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>-->

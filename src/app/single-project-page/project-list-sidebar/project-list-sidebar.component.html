@@ -1,0 +1,6 @@
+<div>
+<app-project *ngFor="let project of projects | filterProjectsByType: searchText: searchType: searchLocation"
+             [project]="project"
+             class="col-md-4 col-sm-6 col-lg-3 "
+></app-project>
+</div>

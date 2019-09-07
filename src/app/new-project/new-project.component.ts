@@ -38,16 +38,18 @@ export class NewProjectComponent implements OnInit {
 
   //todo return the id of the new project
   onSubmit(): void {
-console.log("posting new project form");
+    console.log("posting new project form");
+    console.log("newCreatorID"+this.model.newCreatorId);
     //alert(this.model.type);
     let url = "https://localhost:8443/projects/";
     this.http.post<Project>(url, this.model).subscribe(
       res => {
 
 //todo image can probs be uploaded together with the rest, once i've figured it out
-        if (this.selectedImageFile!=null){
+        if (this.selectedImageFile != null) {
           console.log("image to uploadddd");
-        this.uploadImageFile(res.projectID);}
+          this.uploadImageFile(res.projectID);
+        }
 
         //todo redirect to show the newly uploaded project
         //location.reload();
@@ -70,17 +72,17 @@ console.log("posting new project form");
 
 
   //went from 404, 405, 415, 400, eventually worked!
-  uploadImageFile(projectId:number): void{
+  uploadImageFile(projectId: number): void {
     //alert("image method to upload: " + this.selectedImageFile.name +", to ProjectId "+ projectId);
 
     const fd = new FormData();
     fd.append("file", this.selectedImageFile, this.selectedImageFile.name);
 
-    this.http.post<Project>('https://localhost:8443/projects/'+projectId+"/addImage", fd).subscribe(
-      res =>{
+    this.http.post<Project>('https://localhost:8443/projects/' + projectId + "/addImage", fd).subscribe(
+      res => {
         //alert('boom, image,' + res);
       },
-      err =>{
+      err => {
         alert('an error occurred with image upload');
       }
     )

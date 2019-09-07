@@ -4,6 +4,7 @@ import {AuthService} from "../shared/authentication.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../projects/model/user";
+import {LoginServiceService} from "../shared/login-service.service";
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
   constructor(private fb:FormBuilder,
               private http:HttpClient,
               private authService: AuthService,
-              private router: Router
+              private router: Router,
+              private loginService: LoginServiceService
               ){
     this.form = this.fb.group({
       username: ['', Validators.required],
@@ -43,6 +45,7 @@ export class RegisterComponent implements OnInit {
             this.authService.login(val.username, val.password).subscribe(
               () => {
                 localStorage.setItem('username', val.username);
+                this.loginService.storeUserId(val.username);
                 console.log("User is logged in");
                 this.router.navigateByUrl('/');
               }

@@ -1,0 +1,11 @@
+<div class="row" id="page-row">
+  <div class="col-3 overflow-auto">
+    <app-project-list-sidebar
+      [projects]="projects"></app-project-list-sidebar>
+  </div>
+  <div class="col-9">
+    <app-project-details
+      [projectToShow]="projectID"
+      [projects]="projects"></app-project-details>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<h2>{{project.title}}</h2>
+<p>show here the user details as well, and contact link/email</p>
+<p>{{project.description}}</p>
+<p>{{project.type}}</p>
+<p>Created by: {{project.creator.username}}</p>
+<img *ngIf="project.projectImage!=null" src="data:image/png;base64,{{project.projectImage}}">
+
+

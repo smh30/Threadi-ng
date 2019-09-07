@@ -12,6 +12,7 @@ import {LoginServiceService} from "../shared/login-service.service";
 export class LoginComponent {
 
   form:FormGroup;
+  message:string="";
 
   constructor(private fb:FormBuilder,
               private authService: AuthService,
@@ -34,6 +35,9 @@ export class LoginComponent {
 this.loginService.storeUserId(val.username);
           console.log("User is logged in");
           this.router.navigateByUrl('/');
+        },
+        err=>{
+          this.message="Username or password was incorrect. Please try again"
         }
       );
     }

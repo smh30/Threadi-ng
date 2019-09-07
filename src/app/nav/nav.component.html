@@ -1,6 +1,6 @@
 <!--https://stackoverflow.com/questions/45951341/cant-toggle-navbar-in-bootstrap-4-in-angular-->
 <nav class="navbar pl-5 sticky-top navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Threadi</a>
+  <a class="navbar-brand" routerLink="/">Threadi</a>
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarTogglerDemo01" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -11,21 +11,21 @@
         <!--use 'routerLink' rather than 'href'-->
         <a class="nav-link" routerLink="/projects" (click)="toggleNavbar()">Projects <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li  *ngIf="loginService.isLoggedIn()" class="nav-item">
         <a  class="nav-link"  (click)="toggleNavbar()"
-        *ngIf="loginService.isLoggedIn()"  routerLink="/list-project">List a Project</a>
+         routerLink="/list-project">List a Project</a>
       </li>
-      <li class="nav-item">
-        <a  class="nav-link" (click)="toggleNavbar()" *ngIf="loginService.isLoggedIn()"  routerLink="/profile">Profile</a>
+      <li *ngIf="loginService.isLoggedIn()" class="nav-item">
+        <a  class="nav-link" (click)="toggleNavbar()"  routerLink="/profile">Profile</a>
       </li>
-      <li class="nav-item">
-        <a  class="nav-link" (click)="toggleNavbar()" *ngIf="!loginService.isLoggedIn()"  routerLink="/login">Login</a>
+      <li  *ngIf="!loginService.isLoggedIn()" class="nav-item">
+        <a  class="nav-link" (click)="toggleNavbar()" routerLink="/login">Login</a>
       </li>
-      <li class="nav-item">
-        <a  class="nav-link" (click)="toggleNavbar()" *ngIf="!loginService.isLoggedIn()"  routerLink="/register">Register</a>
+      <li  *ngIf="!loginService.isLoggedIn()" class="nav-item">
+        <a  class="nav-link" (click)="toggleNavbar()" routerLink="/register">Register</a>
       </li>
-      <li class="nav-item">
-        <a  class="nav-link" (click)="toggleNavbar()"  *ngIf="loginService.isLoggedIn()" routerLink="/logout">Logout</a>
+      <li *ngIf="loginService.isLoggedIn()" class="nav-item">
+        <a  class="nav-link" (click)="toggleNavbar()"  routerLink="/logout">Logout</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#">....</a>

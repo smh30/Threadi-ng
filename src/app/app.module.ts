@@ -19,25 +19,41 @@ import { AuthInterceptor} from "./shared/auth-interceptor";
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FilterProjectsByTypePipe } from './shared/filter-projects-by-type.pipe';
+import { ProjectComponent } from './projects/project/project.component';
+import { ProjectDetailsComponent } from './single-project-page/project-details/project-details.component';
+import { SingleProjectPageComponent } from './single-project-page/single-project-page.component';
+import { ProjectListSidebarComponent } from './single-project-page/project-list-sidebar/project-list-sidebar.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
-
+//todo split out routes to its own class/file
 const appRoutes : Routes = [
   //this is the route to each of the components
   {
     path: 'projects',
-    component: ProjectsComponent
+    component: ProjectsComponent,
+    data: {animation: "ProjectsComponent"}
   },
   {
     path: 'list-project',
     component: NewProjectComponent,
   },
   {
+    path: 'project-card',
+    component: ProjectComponent,
+    data: {animation: "ProjectCard"}
+  },
+  {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    data: {animation: "RegisterComponent"}
   },
   {
     path: 'logout',
     component: LogoutComponent
+  },
+  {
+    path: 'project/:id',
+    component: SingleProjectPageComponent
   },
   //this one is the default
   {
@@ -77,6 +93,10 @@ const appRoutes : Routes = [
     RegisterComponent,
     LogoutComponent,
     FilterProjectsByTypePipe,
+    ProjectComponent,
+    ProjectDetailsComponent,
+    SingleProjectPageComponent,
+    ProjectListSidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +105,8 @@ const appRoutes : Routes = [
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}

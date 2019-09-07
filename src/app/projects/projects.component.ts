@@ -49,9 +49,7 @@ searchLocation: string ="";
         this.projects = res;
         this.projects.forEach(p => {
           console.log("this project name: " + p.title);
-          console.log("this project desc: " + p.description);
-          console.log("creator:" + p.creator.username);
-          console.log('logged in user: ' + this.loggedInUser);
+
 
         })
       },
@@ -62,24 +60,35 @@ searchLocation: string ="";
 //edit edit
   }
 
-  public deleteProject(project: Project) {
+public deleteProject(project: Project){
+    console.log("in parent component");
+    console.log("deleting:" +project.projectID);
+    if(confirm("are you sure you want to delete this project?")){
+      let url = "https://localhost:8443/projects/" + project.projectID + "/";
+      this.http.delete<Project[]>(url).subscribe(
+        res => {
+          let indexOfProject = this.projects.indexOf(project);
+          this.projects.splice(indexOfProject, 1);
+        },
+        err => {
+          alert("an error occurred while deleting the project")
+        }
+      )
 
-    let url = "https://localhost:8443/projects/" + project.projectID + "/";
-    this.http.delete<Project[]>(url).subscribe(
-      res => {
-        this.projects = res;
-      },
-      err => {
-        alert("an error occurred while deleting the project")
-      }
-    )
 
-  }
+    }
+}
+
+
 
   public filterProjects(searchParams: object) {
-
+console.log("filtering projects");
     if (searchParams != {}) {
-      let {searchType, searchText, searchLocation} = searchParams;
+      console.log("search params aren't empty");
+      //let {searchType, searchText, searchLocation} = searchParams;
+      let searchType = searchParams[0];
+      let searchText = searchParams[1];
+      let searchLocation = searchParams[2];
       //alert("filteringby: " + searchText);
 
       console.log("in projects.ts text = " + searchText, "type = " + searchType);
