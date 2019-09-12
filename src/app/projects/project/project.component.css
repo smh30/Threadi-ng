@@ -11,6 +11,6 @@ img.icon {
 
 
 .threadi-card {
-
-  outline: 1px solid crimson;
+  box-shadow: 4px 4px 8px grey;
+  /*outline: 1px solid crimson;*/
 }

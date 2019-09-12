@@ -9,9 +9,9 @@
     <img *ngIf="project.type==='sewing'" src="assets/img/suit.svg" class="icon">
     <p class="card-text">{{project.description}}</p>
 
-    <a href="#" class="btn btn-dark"  (click)="viewProject()">See more details</a>
+    <button class="btn btn-dark"  (click)="viewProject()">See more details</button>
 
-    <a *ngIf="project.creator.username==loggedInUser"
-       href="#"  class="btn btn-warning" (click)="deleteProject(project)">Delete Project</a>
+    <!--<button *ngIf="project.creator.username==loggedInUser"-->
+       <!--href="#"  class="btn btn-warning" (click)="deleteProject(project)">Delete Project</button>-->
   </div>
 </div>

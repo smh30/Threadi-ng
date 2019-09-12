@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Project} from "../projects/model/project";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -11,51 +11,73 @@ import {HttpClient} from "@angular/common/http";
 export class SingleProjectPageComponent implements OnInit {
   project: Project;
   projectID: string;
-  projects: Project[];
+  loggedInUser: string;
+
+  //https://medium.com/better-programming/angular-6-url-parameters-860db789db85
 
   constructor(private route: ActivatedRoute,
-              private http: HttpClient) {
-    this.route.params.subscribe(params =>
-      this.projectID = params.id);
-      //console.log(params));
-    console.log("projectID to show = "+this.projectID)
+              private http: HttpClient,
+              private router: Router) {
 
   }
 
   ngOnInit() {
-this.getAllProjects();
+    this.projectID = this.route.snapshot.paramMap.get("id");
+    console.log("project id in single comp: "+ this.projectID);
 
-    // this.project = history.state.data.project;
-    // console.log("in single project page, id="+ this.project.projectID);
+    this.getSingleProject(this.projectID);
+    this.loggedInUser = localStorage.getItem("username");
 
   }
 
   getSingleProject(id: string){
-    // do an http call to get the project info
-    //nope actually get it from the list which still exists in the component next dorr
-  }
-
-  public getAllProjects() {
-    let url = "https://localhost:8443/projects/";
+    let url = "https://localhost:8443/projects/"+ id;
 
 
-    //alert(httpOptions.headers.get("Authorization").toString());
-    this.http.get<Project[]>(url).subscribe(
-      res => {
-        this.projects = res;
-        this.projects.forEach(p => {
-          console.log("this project name: " + p.title);
-          console.log("this project desc: " + p.description);
-          console.log("creator:" + p.creator.username);
-          //console.log('logged in user: ' + this.loggedInUser);
-
-        })
+    this.http.get<Project>(url).subscribe(
+      res=>{
+        this.project = res;
       },
       err => {
-        alert("an error occured while getting project listings")
+        console.log("yup surely an error with getting the project")
       }
-    );
-//edit edit
+    )
+
+  }
+
+return(){
+    this.router.navigateByUrl("/")
+}
+
+
+
+   deleteProject(project: Project){
+    console.log("in project view component");
+    console.log("deleting:" +project.projectID);
+    if(confirm("are you sure you want to delete this project?")){
+      let url = "https://localhost:8443/projects/" + project.projectID + "/";
+      this.http.delete<Project[]>(url).subscribe(
+        res => {
+          // let indexOfProject = this.projects.indexOf(project);
+          // this.projects.splice(indexOfProject, 1);
+          this.router.navigateByUrl("/")
+        },
+        err => {
+          alert("an error occurred while deleting the project")
+        }
+      )
+
+
+    }
+  }
+
+  editProject(project:Project){
+    alert("gonna edit the project "+ project.projectID);
+    //pass the project info to the creat project page
+    this.router.navigate(["/list-project"], {state: {data: {project: this.project}}});
+
+
+
   }
 
 }

@@ -18,7 +18,6 @@ export class NewProjectComponent implements OnInit {
     title: '',
     description: '',
     type: '',
-    location: '',
     newCreatorId: localStorage.getItem("userId")
     // creator: {
     //   "username": this.authService.getLoggedInUser(),
@@ -26,6 +25,8 @@ export class NewProjectComponent implements OnInit {
     //   "email": "email@email"
     // }
   };
+  editMode:boolean = false;
+
 
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
@@ -34,6 +35,17 @@ export class NewProjectComponent implements OnInit {
 
 
   ngOnInit() {
+    //if there's a project sent in (i.e. being accessed to edit
+    //then set the model with that project's info
+    //todo why is this check still causing console errors about being undefined?
+    if (history.state.data.project !== undefined){
+      console.log("a project was passed in");
+      this.editMode = true;
+      this.model = history.state.data.project;
+      //this.model.title = history.state.data.project.title;
+
+    }
+
   }
 
   //todo return the id of the new project
@@ -53,7 +65,30 @@ export class NewProjectComponent implements OnInit {
 
         //todo redirect to show the newly uploaded project
         //location.reload();
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/project/' +res.projectID);
+      },
+      err => {
+        alert("an error has occurred while adding project")
+      }
+    );
+  }
+
+  editProject(): void {
+    console.log("editing new project form");
+    //alert(this.model.type);
+    let url = "https://localhost:8443/projects/";
+    this.http.put<Project>(url, this.model).subscribe(
+      res => {
+
+//todo image can probs be uploaded together with the rest, once i've figured it out
+        if (this.selectedImageFile != null) {
+          console.log("image to uploadddd");
+          this.uploadImageFile(res.projectID);
+        }
+
+        //todo redirect to show the newly uploaded project
+        //location.reload();
+        this.router.navigateByUrl('/project/'+res.projectID);
       },
       err => {
         alert("an error has occurred while adding project")

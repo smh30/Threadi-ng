@@ -5,11 +5,10 @@
     <fieldset>
       <legend>Login</legend>
       <div class="form-field">
-        <label>Username:</label>
-        <input type="text" required class="form-control"  name="username" formControlName="username">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required class="form-control"  name="username" formControlName="username">
       </div>
-      <div *ngIf="(username.dirty || username.touched)" class="alert alert-danger">
-      <div *ngIf="username.errors.required">Username is required</div></div>
+
       <div class="form-field">
         <label>Password:</label>
         <input type="password" required class="form-control" name="password" formControlName="password">

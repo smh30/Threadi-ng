@@ -43,22 +43,18 @@
   </div>
 
 
-  <div class="form-group">
-    <label for="location">Your location:</label>
-    <input type="text"
-           id="location"
-           class="form-control"
-           [(ngModel)]="location"
-           name="location"/>
 
-  </div>
 
 Max image size = 1MB.
   <input type="file" (change)="onImageSelect($event)">
 
-  <button type="submit" class="btn btn-success">
+  <button *ngIf="!editMode" type="submit" class="btn btn-success">
     <!--[disabled]="!heroForm.form.valid"-->
     Create my project
+  </button>
+  <button *ngIf="editMode" type="button" (click)="editProject()" class="btn btn-success">
+    <!--[disabled]="!heroForm.form.valid"-->
+    Edit my project
   </button>
 </form>
 </div>

@@ -11,6 +11,7 @@ import {HttpClient} from "@angular/common/http";
 export class ProjectComponent implements OnInit {
 
   @Input() project: Project;
+
   loggedInUser: string;
 
 
@@ -22,18 +23,20 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.loggedInUser = localStorage.getItem("username");
+    //console.log("in project, list length=" + this.projects.length)
   }
 
   viewProject(){
-    this.router.navigateByUrl("/project/"+this.project.projectID);
-    // console.log("navigating to project id: "+ this.project.projectID);
+
+     this.router.navigateByUrl("/project/"+this.project.projectID, );
+    //  console.log("navigating to project id: "+ this.project.projectID);
     // this.router.navigate(["/project"], {state: {data: {project:this.project}}})
   }
 
-  deleteProject(){
-    console.log("in projecct, deleting: "+ this.project.projectID);
-    this.projectDeleted.emit(this.project);
-    console.log("emitted")
-  }
+  // deleteProject(){
+  //   console.log("in projecct, deleting: "+ this.project.projectID);
+  //   this.projectDeleted.emit(this.project);
+  //   console.log("emitted")
+  // }
 
 }

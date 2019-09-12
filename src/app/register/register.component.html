@@ -1,28 +1,93 @@
 <div class="p-4">
-  <form [formGroup]="form">
+  <form name="form" #f="ngForm" (submit)="f.form.valid && register()" novalidate class="form-horizontal">
 
-    <fieldset>
-      <legend>Register</legend>
-      <div class="form-field">
-        <label>Username:</label>
-        <input type="text" name="username" formControlName="username">
+
+      <H1>Register</H1>
+      <div class="form-group row">
+        <label for="username"
+               class="control-label col-md-3 col-form-label">
+          Username:</label>
+        <input type="text"
+               required
+               class="form-control col-md-7"
+               id="username"
+               name="username"
+               [(ngModel)]="model.username"
+               #username="ngModel"
+               [ngClass]="{ 'is-invalid': f.submitted && username.invalid }"
+               >
+        <div *ngIf="f.submitted && username.invalid" class="text-danger">
+          <div *ngIf="username.errors?.required">Username is required</div>
+        </div>
       </div>
-      <div class="form-field">
-        <label>Email:</label>
-        <input type="text" name="email" formControlName="email">
+      <div class="form-group row">
+        <label for="email"
+               class="control-label col-md-3 col-form-label">
+          Email:</label>
+        <input type="email"
+               required
+               class="form-control col-md-7"
+               id="email"
+               name="email"
+               [(ngModel)]="model.email"
+               #email="ngModel"
+               [ngClass] = "{'is-invalid': f.submitted && email.invalid }"
+               email
+               >
+        <div *ngIf="f.submitted && email.invalid" class="text-danger">
+          <div *ngIf="email.errors?.required">Email is required</div>
+          <div *ngIf="email.errors?.email">Please provide a valid email address</div>
+        </div>
       </div>
-      <div class="form-field">
-        <label>Password:</label>
-        <input type="password" name="password" formControlName="password">
+    <div ngModelGroup="passwords"
+    #passwords="ngModelGroup"
+         appCheckPassword
+    >
+      <div class="form-group row">
+        <label for="password"
+               class="control-label col-md-3 col-form-label">
+          Password:</label>
+        <input type="password"
+               required
+               class="form-control col-md-7"
+               id="password"
+               name="password"
+               [(ngModel)]="model.password"
+               #password="ngModel"
+               [ngClass] = "{'is-invalid': f.submitted && password.invalid}"
+               minlength="8"
+               >
+        <div *ngIf="f.submitted && password.invalid" class="text-danger">
+          <div *ngIf="password.errors?.required">Password is required</div>
+          <div *ngIf="password.errors?.minlength">Password must be 8 or more characters</div>
+        </div>
       </div>
-      <!--<div class="form-field">-->
-        <!--<label>Confirm Password:</label>-->
-        <!--<input type="password" name="password" formControlName="password">-->
-      <!--</div>-->
-    </fieldset>
+      <div class="form-group row">
+        <label for="pword2"
+               class="control-label col-md-3 col-form-label">
+          Confirm Password:</label>
+        <input type="password"
+               required
+               class="form-control col-md-7"
+               id="pword2"
+               name="pword2"
+               [(ngModel)]="pwConfirm"
+               #pword2="ngModel"
+               [ngClass] = "{'is-invalid': f.submitted && pword2.invalid}"
+               >
+        <div *ngIf="f.submitted && pword2.invalid" class="text-danger">
+          <div *ngIf="pword2.errors?.required">Required</div>
+          <!--<div *ngIf="password.errors?.minlength">Password must be 8 or more characters</div>-->
+        </div>
+      </div>
+      <div *ngIf="passwords.errors?.passwordCheck && (pword2.dirty || pword2.touched)"
+           class="alert alert-danger">Passwords don't match</div>
+    </div>
+
+
     <div class="form-buttons">
       <button class="button btn btn-primary"
-              (click)="register()">Register</button>
+              >Register</button>
     </div>
 
 

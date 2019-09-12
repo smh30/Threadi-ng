@@ -60,24 +60,24 @@ searchLocation: string ="";
 //edit edit
   }
 
-public deleteProject(project: Project){
-    console.log("in parent component");
-    console.log("deleting:" +project.projectID);
-    if(confirm("are you sure you want to delete this project?")){
-      let url = "https://localhost:8443/projects/" + project.projectID + "/";
-      this.http.delete<Project[]>(url).subscribe(
-        res => {
-          let indexOfProject = this.projects.indexOf(project);
-          this.projects.splice(indexOfProject, 1);
-        },
-        err => {
-          alert("an error occurred while deleting the project")
-        }
-      )
-
-
-    }
-}
+// public deleteProject(project: Project){
+//     console.log("in parent component");
+//     console.log("deleting:" +project.projectID);
+//     if(confirm("are you sure you want to delete this project?")){
+//       let url = "https://localhost:8443/projects/" + project.projectID + "/";
+//       this.http.delete<Project[]>(url).subscribe(
+//         res => {
+//           let indexOfProject = this.projects.indexOf(project);
+//           this.projects.splice(indexOfProject, 1);
+//         },
+//         err => {
+//           alert("an error occurred while deleting the project")
+//         }
+//       )
+//
+//
+//     }
+// }
 
 
 

@@ -8,15 +8,13 @@ import {Project} from "../../projects/model/project";
 })
 export class ProjectDetailsComponent implements OnInit {
   @Input() projectToShow: string;
-  @Input() projects: Project[] = [];
 
   project:Project;
 
   constructor() { }
 
   ngOnInit() {
-    //console.log("In individual project page, projectid = "+this.project.projectID);
-    this.project = this.projects.find(i => i.projectID.toString()===this.projectToShow);
+
   }
 
 }

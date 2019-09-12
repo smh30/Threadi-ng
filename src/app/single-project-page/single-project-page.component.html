@@ -1,11 +1,14 @@
-<div class="row" id="page-row">
-  <div class="col-3 overflow-auto">
-    <app-project-list-sidebar
-      [projects]="projects"></app-project-list-sidebar>
-  </div>
-  <div class="col-9">
-    <app-project-details
-      [projectToShow]="projectID"
-      [projects]="projects"></app-project-details>
-  </div>
-</div>
+<h2>{{project.title}}</h2>
+<p>Project listed by: {{project.creator.username}}. Contact them at {{project.creator.email}}</p>
+<p>{{project.description}}</p>
+<p>{{project.type}}</p>
+<p>Created by: {{project.creator.username}}</p>
+<img *ngIf="project.projectImage!=null" src="data:image/png;base64,{{project.projectImage}}">
+
+<button *ngIf="project.creator.username==loggedInUser"
+        class="btn btn-warning" (click)="deleteProject(project)">Delete Project</button>
+
+<button *ngIf="project.creator.username==loggedInUser"
+        class="btn btn-warning" (click)="editProject(project)">Edit Project</button>
+
+<button class="btn btn-primary" (click)="return()">return to projects list</button>
