@@ -8,10 +8,11 @@
     <img *ngIf="project.type==='knitting'" src="assets/img/knitting.svg" class="icon">
     <img *ngIf="project.type==='sewing'" src="assets/img/suit.svg" class="icon">
     <p class="card-text">{{project.description}}</p>
-
-    <button class="btn btn-dark"  (click)="viewProject()">See more details</button>
-
+  </div>
+<div class="card-footer text-center">
+    <button class="btn btn-dark "  (click)="viewProject()">See more details</button>
+  </div>
     <!--<button *ngIf="project.creator.username==loggedInUser"-->
        <!--href="#"  class="btn btn-warning" (click)="deleteProject(project)">Delete Project</button>-->
-  </div>
+
 </div>

@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit {
     searchType: "",
     searchLocation: ""
   };
+  isDisplayed:boolean = false;
 
   constructor(private http: HttpClient) {
 
@@ -40,6 +41,10 @@ export class SearchComponent implements OnInit {
     this.searchParams.searchText ="";
     this.searchParams.searchLocation ="";
     this.searchEvent.emit(this.searchParams);
+  }
+
+  showSearch(){
+this.isDisplayed = !this.isDisplayed;
   }
 
 }

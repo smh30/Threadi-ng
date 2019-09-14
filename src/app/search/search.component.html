@@ -1,3 +1,6 @@
+<button *ngIf="!isDisplayed" class="btn btn-primary" (click)="showSearch()">Search for projects</button>
+<div [hidden]="!isDisplayed" id="searchTools">
+
 <form>
   <div class="form-group">
     Filter projects by type:
@@ -34,12 +37,15 @@
          [(ngModel)]="searchParams.searchText"
          />
   <button type="submit"
-         class="btn btn-dark"
+         class="btn btn-dark m-1"
          (click)="submitSearch()"
         >Search</button>
   <button type="button"
-          class="btn btn-dark"
+          class="btn btn-dark m-1"
           (click)="clearParams()"
   >Remove filter</button>
   <!--todo make this real time rather than requiring submit-->
 </form>
+
+</div>
+<button *ngIf="isDisplayed" class="btn btn-primary" (click)="showSearch()">Hide search tools</button>

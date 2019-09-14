@@ -12,22 +12,38 @@ import {Router} from "@angular/router";
 export class NewProjectComponent implements OnInit {
 
   selectedImageFile: File = null;
-  //authService: AuthService;
+  public imagePath;
+  imgURL: any;
+  public message: string;
+  imagePassedIn: File;
+  editMode: boolean = false;
 
   model = {
     title: '',
     description: '',
     type: '',
     newCreatorId: localStorage.getItem("userId")
-    // creator: {
-    //   "username": this.authService.getLoggedInUser(),
-    //   "location": "here",
-    //   "email": "email@email"
-    // }
   };
-  editMode:boolean = false;
 
 
+  preview(files) {
+    if (files.length === 0) {
+      return;
+    }
+    let mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported"
+      return;
+    }
+
+    this.selectedImageFile = files[0];
+    let reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(this.selectedImageFile);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
+    }
+  }
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
 
@@ -38,20 +54,20 @@ export class NewProjectComponent implements OnInit {
     //if there's a project sent in (i.e. being accessed to edit
     //then set the model with that project's info
     //todo why is this check still causing console errors about being undefined?
-    if (history.state.data.project !== undefined){
+    if (history.state.data.project !== undefined) {
       console.log("a project was passed in");
       this.editMode = true;
       this.model = history.state.data.project;
+      this.imagePassedIn = history.state.data.project.projectImage;
       //this.model.title = history.state.data.project.title;
 
     }
-
   }
 
   //todo return the id of the new project
   onSubmit(): void {
     console.log("posting new project form");
-    console.log("newCreatorID"+this.model.newCreatorId);
+    console.log("newCreatorID" + this.model.newCreatorId);
     //alert(this.model.type);
     let url = "https://localhost:8443/projects/";
     this.http.post<Project>(url, this.model).subscribe(
@@ -65,7 +81,7 @@ export class NewProjectComponent implements OnInit {
 
         //todo redirect to show the newly uploaded project
         //location.reload();
-        this.router.navigateByUrl('/project/' +res.projectID);
+        this.router.navigateByUrl('/project/' + res.projectID);
       },
       err => {
         alert("an error has occurred while adding project")
@@ -88,7 +104,7 @@ export class NewProjectComponent implements OnInit {
 
         //todo redirect to show the newly uploaded project
         //location.reload();
-        this.router.navigateByUrl('/project/'+res.projectID);
+        this.router.navigateByUrl('/project/' + res.projectID);
       },
       err => {
         alert("an error has occurred while adding project")
@@ -99,11 +115,11 @@ export class NewProjectComponent implements OnInit {
   //https://www.youtube.com/watch?v=YkvqLNcJz3Y
   //todo fix the url once the backend is built
 
-
-  onImageSelect(event): void {
-    console.log(event);
-    this.selectedImageFile = event.target.files[0];
-  }
+  //
+  // onImageSelect(event): void {
+  //   console.log(event);
+  //  this.selectedImageFile = event.target.files[0];
+  // }
 
 
   //went from 404, 405, 415, 400, eventually worked!

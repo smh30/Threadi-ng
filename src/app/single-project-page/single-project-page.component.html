@@ -1,14 +1,15 @@
 <h2>{{project.title}}</h2>
-<p>Project listed by: {{project.creator.username}}. Contact them at {{project.creator.email}}</p>
-<p>{{project.description}}</p>
+<p>Project listed by: <strong>{{project.creator.username}}</strong>. Contact them at {{project.creator.email}}</p>
+<p style="white-space: pre-line">{{project.description}}</p>
 <p>{{project.type}}</p>
 <p>Created by: {{project.creator.username}}</p>
-<img *ngIf="project.projectImage!=null" src="data:image/png;base64,{{project.projectImage}}">
+<img *ngIf="project.projectImage!=null" src="data:image/png;base64,{{project.projectImage}}"
+class="">
 
 <button *ngIf="project.creator.username==loggedInUser"
-        class="btn btn-warning" (click)="deleteProject(project)">Delete Project</button>
+        class="btn btn-warning m-2" (click)="deleteProject(project)">Delete Project</button>
 
 <button *ngIf="project.creator.username==loggedInUser"
-        class="btn btn-warning" (click)="editProject(project)">Edit Project</button>
+        class="btn btn-warning m-2" (click)="editProject(project)">Edit Project</button>
 
-<button class="btn btn-primary" (click)="return()">return to projects list</button>
+<button class="btn btn-primary m-2" (click)="return()">return to projects list</button>

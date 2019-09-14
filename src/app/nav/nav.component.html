@@ -15,9 +15,7 @@
         <a  class="nav-link"  (click)="toggleNavbar()"
          routerLink="/list-project">List a Project</a>
       </li>
-      <li *ngIf="loginService.isLoggedIn()" class="nav-item">
-        <a  class="nav-link" (click)="toggleNavbar()"  routerLink="/profile">Profile</a>
-      </li>
+
       <li  *ngIf="!loginService.isLoggedIn()" class="nav-item">
         <a  class="nav-link" (click)="toggleNavbar()" routerLink="/login">Login</a>
       </li>

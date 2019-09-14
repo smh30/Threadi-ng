@@ -1,16 +1,26 @@
 img.icon {
   width: 40px;
-  float: right;
+  /*float: right;*/
+  position: absolute;
+  right: 10px;
+  top: 270px;
 }
 
 .card-img-top {
   height: 250px !important;
   position: relative;
-  top: 20px;
+  /*top: 20px;*/
 }
 
 
 .threadi-card {
-  box-shadow: 4px 4px 8px grey;
+  box-shadow: 0px 0px 4px #bbbbbb;
+
   /*outline: 1px solid crimson;*/
 }
+
+.threadi-card:hover {
+  box-shadow: 0px 0px 8px grey;
+}
+
+

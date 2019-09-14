@@ -13,13 +13,17 @@
                id="username"
                name="username"
                [(ngModel)]="model.username"
+               appCheckUsername
                #username="ngModel"
                [ngClass]="{ 'is-invalid': f.submitted && username.invalid }"
                >
         <div *ngIf="f.submitted && username.invalid" class="text-danger">
           <div *ngIf="username.errors?.required">Username is required</div>
+          <div *ngIf="username.errors?.appCheckUsername">Username is taken</div>
         </div>
       </div>
+
+
       <div class="form-group row">
         <label for="email"
                class="control-label col-md-3 col-form-label">
@@ -57,6 +61,7 @@
                [ngClass] = "{'is-invalid': f.submitted && password.invalid}"
                minlength="8"
                >
+        password = {{password.value}}
         <div *ngIf="f.submitted && password.invalid" class="text-danger">
           <div *ngIf="password.errors?.required">Password is required</div>
           <div *ngIf="password.errors?.minlength">Password must be 8 or more characters</div>
@@ -73,15 +78,19 @@
                name="pword2"
                [(ngModel)]="pwConfirm"
                #pword2="ngModel"
+               pattern="{{password.value}}"
                [ngClass] = "{'is-invalid': f.submitted && pword2.invalid}"
                >
+        check = {{pword2.value}}
+        <!--todo figure out the error with pattern change-->
         <div *ngIf="f.submitted && pword2.invalid" class="text-danger">
           <div *ngIf="pword2.errors?.required">Required</div>
+          <div *ngIf="pword2.errors?.pattern">Doesn't match</div>
           <!--<div *ngIf="password.errors?.minlength">Password must be 8 or more characters</div>-->
         </div>
       </div>
-      <div *ngIf="passwords.errors?.passwordCheck && (pword2.dirty || pword2.touched)"
-           class="alert alert-danger">Passwords don't match</div>
+      <!--<div *ngIf="passwords.errors?.passwordCheck && (pword2.dirty || pword2.touched)"-->
+           <!--class="alert alert-danger">Passwords don't match</div>-->
     </div>
 
 

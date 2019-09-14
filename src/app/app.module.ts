@@ -24,7 +24,7 @@ import { ProjectDetailsComponent } from './single-project-page/project-details/p
 import { SingleProjectPageComponent } from './single-project-page/single-project-page.component';
 import { ProjectListSidebarComponent } from './single-project-page/project-list-sidebar/project-list-sidebar.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { CheckPasswordDirective } from './register/check-password.directive';
+// import { CheckPasswordDirective } from './register/check-password.directive';
 
 //todo split out routes to its own class/file
 const appRoutes : Routes = [
@@ -98,7 +98,7 @@ const appRoutes : Routes = [
     ProjectDetailsComponent,
     SingleProjectPageComponent,
     ProjectListSidebarComponent,
-    CheckPasswordDirective,
+    // CheckPasswordDirective,
   ],
   imports: [
     BrowserModule,
