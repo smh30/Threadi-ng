@@ -24,6 +24,8 @@ import { ProjectDetailsComponent } from './single-project-page/project-details/p
 import { SingleProjectPageComponent } from './single-project-page/single-project-page.component';
 import { ProjectListSidebarComponent } from './single-project-page/project-list-sidebar/project-list-sidebar.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { NameEditorComponent } from './name-editor/name-editor.component';
+import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 // import { CheckPasswordDirective } from './register/check-password.directive';
 
 //todo split out routes to its own class/file
@@ -66,6 +68,15 @@ const appRoutes : Routes = [
     path: 'profile',
     component: ProfileComponent,
   },
+  //todo delte this debugging thing
+  {
+    path: 'test',
+    component: NameEditorComponent,
+  },
+  {
+    path: "test2",
+    component: ProfileEditorComponent
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -98,6 +109,8 @@ const appRoutes : Routes = [
     ProjectDetailsComponent,
     SingleProjectPageComponent,
     ProjectListSidebarComponent,
+    NameEditorComponent,
+    ProfileEditorComponent,
     // CheckPasswordDirective,
   ],
   imports: [
