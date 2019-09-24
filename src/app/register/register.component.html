@@ -13,11 +13,11 @@
              id="username"
              formControlName="username"
       >
-      <div *ngIf="submitted && username.invalid && (username.dirty || username.touched)" class="text-danger">
+      <div *ngIf="submitted && username.invalid && (username.dirty || username.touched)" class="text-danger p-3">
         <div *ngIf="username.errors?.required">Username is required</div>
         <!--<div *ngIf="username.errors?.appCheckUsername">Username is taken</div>-->
       </div>
-      <div *ngIf="username.errors?.UsernameTaken">Username taken soz</div>
+      <div *ngIf="username.errors?.UsernameTaken" class="text-danger p-3">Sorry, that username is taken</div>
     </div>
 
 
@@ -32,7 +32,7 @@
              id="email"
              formControlName="email"
       >
-      <div *ngIf="submitted && email.invalid" class="text-danger">
+      <div *ngIf="submitted && email.invalid" class="text-danger p-3">
         <div *ngIf="email.errors.required">Email is required</div>
         <div *ngIf="email.errors.email">Please provide a valid email address</div>
       </div>
@@ -58,13 +58,16 @@
           <!--<div *ngIf="f.password1.errors?.minlength">Password must be 10 or more characters</div>-->
         </div>
 
-        <div>Must be <span [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('minlength') ? 'text-danger': 'text-success'">at least 10 characters long</span> and contain <span [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('hasNumber') ? 'text-danger': 'text-success'">
+        <div class="p-3">Requirements:
+          <ul><li [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('minlength') ? 'text-danger': 'text-success'">at least 10 characters long</li>
+            <li [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('hasNumber') ? 'text-danger': 'text-success'">
           at least 1 number,
-        </span><span [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('hasCapitalCase') ? 'text-danger': 'text-success'">
+        </li><li [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('hasCapitalCase') ? 'text-danger': 'text-success'">
           at least 1 uppercase letter,
-        </span> and <span [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('hasSmallCase') ? 'text-danger': 'text-success'">
+        </li><li [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('hasSmallCase') ? 'text-danger': 'text-success'">
           at least 1 lowercase letter
-        </span></div>
+        </li></ul>
+        </div>
 
         <!--<div [ngClass]="registerForm.controls['password1'].hasError('required') || registerForm.controls['password1'].hasError('hasNumber') ? 'text-danger': 'text-success'">-->
           <!--Must have at least 1 number!-->
@@ -91,7 +94,7 @@
         >
 
         <!--todo figure out the error with pattern change-->
-        <div *ngIf="submitted && f.password2.invalid" class="text-danger">
+        <div *ngIf="submitted && f.password2.invalid" class="text-danger p-3">
           <div *ngIf="f.password2.errors?.required">Password is required</div>
 
         </div>

@@ -12,9 +12,37 @@ img.icon {
   /*top: 20px;*/
 }
 
+.thumbnail{
+  position: relative;
+  margin: 10px;
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+}
+
+/*.thumbnail img {*/
+  /*position: absolute;*/
+  /*left: 50%;*/
+  /*top: 50%;*/
+  /*height: 100%;*/
+  /*width: auto;*/
+  /*-webkit-transform: translate(-50%,-50%);*/
+  /*-ms-transform: translate(-50%,-50%);*/
+  /*transform: translate(-50%,-50%);*/
+/*}*/
+
+.thumbnail img{
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
 
 .threadi-card {
   box-shadow: 0px 0px 4px #bbbbbb;
+width: 270px
 
   /*outline: 1px solid crimson;*/
 }
@@ -22,5 +50,7 @@ img.icon {
 .threadi-card:hover {
   box-shadow: 0px 0px 8px grey;
 }
+
+
 
 

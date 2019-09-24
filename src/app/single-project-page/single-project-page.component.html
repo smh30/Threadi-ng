@@ -1,3 +1,4 @@
+<div class="container">
 <h2>{{project.title}}</h2>
 <p>Project listed by: <strong>{{project.creator.username}}</strong>. Contact them at {{project.creator.email}}</p>
 <p style="white-space: pre-line">{{project.description}}</p>
@@ -6,6 +7,7 @@
 <img *ngIf="project.projectImage!=null" src="data:image/png;base64,{{project.projectImage}}"
 class="">
 
+  <div id="buttons" class="align-bottom">
 <button *ngIf="project.creator.username==loggedInUser"
         class="btn btn-warning m-2" (click)="deleteProject(project)">Delete Project</button>
 
@@ -13,3 +15,5 @@ class="">
         class="btn btn-warning m-2" (click)="editProject(project)">Edit Project</button>
 
 <button class="btn btn-primary m-2" (click)="return()">return to projects list</button>
+</div>
+</div>

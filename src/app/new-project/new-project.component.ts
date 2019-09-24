@@ -22,7 +22,7 @@ export class NewProjectComponent implements OnInit {
     title: '',
     description: '',
     type: '',
-    newCreatorId: localStorage.getItem("userId")
+    projectCreatorId: localStorage.getItem("userId")
   };
 
 
@@ -67,20 +67,19 @@ export class NewProjectComponent implements OnInit {
   //todo return the id of the new project
   onSubmit(): void {
     console.log("posting new project form");
-    console.log("newCreatorID" + this.model.newCreatorId);
-    //alert(this.model.type);
+    console.log("newCreatorID" + this.model.projectCreatorId);
+
     let url = "https://localhost:8443/projects/";
     this.http.post<Project>(url, this.model).subscribe(
       res => {
 
-//todo image can probs be uploaded together with the rest, once i've figured it out
+
         if (this.selectedImageFile != null) {
           console.log("image to uploadddd");
           this.uploadImageFile(res.projectID);
         }
 
-        //todo redirect to show the newly uploaded project
-        //location.reload();
+
         this.router.navigateByUrl('/project/' + res.projectID);
       },
       err => {
@@ -112,14 +111,7 @@ export class NewProjectComponent implements OnInit {
     );
   }
 
-  //https://www.youtube.com/watch?v=YkvqLNcJz3Y
-  //todo fix the url once the backend is built
 
-  //
-  // onImageSelect(event): void {
-  //   console.log(event);
-  //  this.selectedImageFile = event.target.files[0];
-  // }
 
 
   //went from 404, 405, 415, 400, eventually worked!
@@ -131,6 +123,7 @@ export class NewProjectComponent implements OnInit {
 
     this.http.post<Project>('https://localhost:8443/projects/' + projectId + "/addImage", fd).subscribe(
       res => {
+        return;
         //alert('boom, image,' + res);
       },
       err => {

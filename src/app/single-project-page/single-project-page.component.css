@@ -2,3 +2,15 @@
   height: 80vh;
 
 }
+
+img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.container {
+  height: 400px;
+}
+
+

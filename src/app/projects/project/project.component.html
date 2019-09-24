@@ -1,13 +1,16 @@
 <div class="threadi-card card m-1">
 
-  <img *ngIf="project.projectImage!=null" class="card-img-top" src="data:image/png;base64,{{project.projectImage}}" alt="Project image">
-  <img *ngIf="project.projectImage==null" class="card-img-top" src="assets/img/placeholder.jpg" alt="Default project image">
+  <div class="thumbnail">
+    <img *ngIf="project.projectImage!=null" class="card-image p-1" src="data:image/png;base64,{{project.projectImage}}" alt="Project image">
+    <img *ngIf="project.projectImage==null" class="card-image p-1" src="assets/img/placeholder.jpg" alt="Default project image">
+
+</div>
   <div class="card-body">
     <h5 class="card-title">{{project.title}}</h5>
-    <p class="card-text">{{project.creator.username}}, {{project.creator.userId}}</p>
+    <!--<p class="card-text">{{project.creator.username}}, {{project.creator.userId}}</p>-->
     <img *ngIf="project.type==='knitting'" src="assets/img/knitting.svg" class="icon">
     <img *ngIf="project.type==='sewing'" src="assets/img/suit.svg" class="icon">
-    <p class="card-text">{{project.description}}</p>
+    <!--<p class="card-text">{{project.description}}</p>-->
   </div>
 <div class="card-footer text-center">
     <button class="btn btn-dark "  (click)="viewProject()">See more details</button>

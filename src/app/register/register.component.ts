@@ -60,7 +60,11 @@ export class RegisterComponent implements OnInit {
       console.log("still invalid");
       return;
     }
-    alert('yay form is good!!')
+    alert('yay form is good!!');
+    this.register();
+
+
+
   }
 
   get f() {
@@ -75,30 +79,49 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.get('email');
   }
 
+  get password(){
+    return this.registerForm.get("password1");
+  }
 
 
 
-  // register(): void {
-  //   this.http.post<User>("https://localhost:8443/users", this.model).subscribe(
-  //     res => {
-  //       alert("successful registration, " + res.userId + res.username);
-  //
-  //       //todo see if this can be pulled out to a service??
-  //       this.authService.login(this.model.username, this.model.password).subscribe(
-  //         () => {
-  //           localStorage.setItem('username', this.model.username);
-  //           this.loginService.storeUserId(this.model.username);
-  //           console.log("User is logged in");
-  //           this.router.navigateByUrl('/');
-  //         }
-  //       );
-  //     }, err => {
-  //       alert("an error with registration" + err)
-  //     }
-  //   )
-  //
-  // }
 
+  register(): void {
+
+    let user:NewUser = {
+      username: this.registerForm.value.username,
+      password: this.registerForm.value.password1,
+    email: this.registerForm.value.email
+    };
+
+    console.log(user);
+
+    this.http.post<User>("https://localhost:8443/users", user).subscribe(
+      res => {
+        alert("successful registration, " + res.userId + res.username);
+
+        //todo see if this can be pulled out to a service??
+        this.authService.login(user.username, user.password).subscribe(
+          () => {
+            localStorage.setItem('username', user.username);
+            this.loginService.storeUserId(user.username);
+            console.log("User is logged in");
+            this.router.navigateByUrl('/');
+          }
+        );
+      }, err => {
+        alert("an error with registration" + err)
+      }
+    )
+
+  }
+
+}
+
+export interface NewUser {
+  username:string;
+  password:string;
+  email:string;
 }
 
 

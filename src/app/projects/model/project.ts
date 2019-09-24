@@ -9,11 +9,11 @@ export interface Project {
   projectImage: File;
 
 
-  // constructor(
-  //   id: string,
-  //   title: string,
-  //   description: string,
-  //   type: string
-  // );
+  constructor(
+    id: string,
+    title: string,
+    description: string,
+    type: string
+  );
 
 }

@@ -20,9 +20,8 @@ import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FilterProjectsByTypePipe } from './shared/filter-projects-by-type.pipe';
 import { ProjectComponent } from './projects/project/project.component';
-import { ProjectDetailsComponent } from './single-project-page/project-details/project-details.component';
 import { SingleProjectPageComponent } from './single-project-page/single-project-page.component';
-import { ProjectListSidebarComponent } from './single-project-page/project-list-sidebar/project-list-sidebar.component';
+
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { NameEditorComponent } from './name-editor/name-editor.component';
 import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
@@ -106,9 +105,9 @@ const appRoutes : Routes = [
     LogoutComponent,
     FilterProjectsByTypePipe,
     ProjectComponent,
-    ProjectDetailsComponent,
+    //ProjectDetailsComponent,
     SingleProjectPageComponent,
-    ProjectListSidebarComponent,
+    // ProjectListSidebarComponent,
     NameEditorComponent,
     ProfileEditorComponent,
     // CheckPasswordDirective,
