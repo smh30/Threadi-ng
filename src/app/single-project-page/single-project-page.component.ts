@@ -25,18 +25,22 @@ export class SingleProjectPageComponent implements OnInit {
     this.projectID = this.route.snapshot.paramMap.get("id");
     console.log("project id in single comp: "+ this.projectID);
 
-    this.getSingleProject(this.projectID);
-    this.loggedInUser = localStorage.getItem("username");
+    this.getSingleProject(this.projectID, ()=>{
+      this.loggedInUser = localStorage.getItem("username");
+    });
+
 
   }
 
-  getSingleProject(id: string){
+  getSingleProject(id: string, callback){
     let url = "https://localhost:8443/projects/"+ id;
 
 
     this.http.get<Project>(url).subscribe(
       res=>{
+        console.log("got project");
         this.project = res;
+        callback();
       },
       err => {
         console.log("yup surely an error with getting the project")

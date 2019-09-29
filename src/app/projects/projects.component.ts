@@ -18,7 +18,6 @@ export class ProjectsComponent implements OnInit {
   // };
 searchType: string = "";
 searchText: string ="";
-searchLocation: string ="";
   loggedInUser: string;
 
 
@@ -60,24 +59,7 @@ searchLocation: string ="";
 //edit edit
   }
 
-// public deleteProject(project: Project){
-//     console.log("in parent component");
-//     console.log("deleting:" +project.projectID);
-//     if(confirm("are you sure you want to delete this project?")){
-//       let url = "https://localhost:8443/projects/" + project.projectID + "/";
-//       this.http.delete<Project[]>(url).subscribe(
-//         res => {
-//           let indexOfProject = this.projects.indexOf(project);
-//           this.projects.splice(indexOfProject, 1);
-//         },
-//         err => {
-//           alert("an error occurred while deleting the project")
-//         }
-//       )
-//
-//
-//     }
-// }
+
 
 
 
@@ -85,16 +67,16 @@ searchLocation: string ="";
 console.log("filtering projects");
     if (searchParams != {}) {
       console.log("search params aren't empty");
+      console.log(searchParams);
       //let {searchType, searchText, searchLocation} = searchParams;
-      let searchType = searchParams[0];
-      let searchText = searchParams[1];
-      let searchLocation = searchParams[2];
-      //alert("filteringby: " + searchText);
+      //if (searchParams.hasOwnProperty('searchType'))
+      let searchType = searchParams['searchType'];
+      let searchText = searchParams['searchText'];
+
 
       console.log("in projects.ts text = " + searchText, "type = " + searchType);
       this.searchText = searchText;
       this.searchType = searchType;
-      this.searchLocation = searchLocation;
     }
   }
 

@@ -32,7 +32,7 @@ export class NewProjectComponent implements OnInit {
     }
     let mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
-      this.message = "Only images are supported"
+      this.message = "Only images are supported";
       return;
     }
 
@@ -54,18 +54,17 @@ export class NewProjectComponent implements OnInit {
     //if there's a project sent in (i.e. being accessed to edit
     //then set the model with that project's info
     //todo why is this check still causing console errors about being undefined?
-    if (history.state.data.project !== undefined) {
+    if (history.state.data !== undefined) {
       console.log("a project was passed in");
       this.editMode = true;
       this.model = history.state.data.project;
       this.imagePassedIn = history.state.data.project.projectImage;
       //this.model.title = history.state.data.project.title;
-
     }
   }
 
   //todo return the id of the new project
-  onSubmit(): void {
+  async onSubmit() {
     console.log("posting new project form");
     console.log("newCreatorID" + this.model.projectCreatorId);
 
@@ -76,11 +75,17 @@ export class NewProjectComponent implements OnInit {
 
         if (this.selectedImageFile != null) {
           console.log("image to uploadddd");
-          this.uploadImageFile(res.projectID);
+
+          this.uploadImageFile(res.projectID, () => {
+            this.router.navigateByUrl('/project/' + res.projectID);
+          });
+
+
+        } else {
+
+//if no image
+          this.router.navigateByUrl('/project/' + res.projectID);
         }
-
-
-        this.router.navigateByUrl('/project/' + res.projectID);
       },
       err => {
         alert("an error has occurred while adding project")
@@ -98,7 +103,9 @@ export class NewProjectComponent implements OnInit {
 //todo image can probs be uploaded together with the rest, once i've figured it out
         if (this.selectedImageFile != null) {
           console.log("image to uploadddd");
-          this.uploadImageFile(res.projectID);
+          this.uploadImageFile(res.projectID, () => {
+            this.router.navigateByUrl('/project/' + res.projectID);
+          });
         }
 
         //todo redirect to show the newly uploaded project
@@ -112,24 +119,22 @@ export class NewProjectComponent implements OnInit {
   }
 
 
-
-
   //went from 404, 405, 415, 400, eventually worked!
-  uploadImageFile(projectId: number): void {
+  uploadImageFile(projectId: number, callback) {
     //alert("image method to upload: " + this.selectedImageFile.name +", to ProjectId "+ projectId);
 
-    const fd = new FormData();
-    fd.append("file", this.selectedImageFile, this.selectedImageFile.name);
+      const fd = new FormData();
+      fd.append("file", this.selectedImageFile, this.selectedImageFile.name);
 
-    this.http.post<Project>('https://localhost:8443/projects/' + projectId + "/addImage", fd).subscribe(
-      res => {
-        return;
-        //alert('boom, image,' + res);
-      },
-      err => {
-        alert('an error occurred with image upload');
-      }
-    )
+      this.http.post<Project>('https://localhost:8443/projects/' + projectId + "/addImage", fd).subscribe(
+        value => {
+          //alert(value.projectImage);
+callback();
+        },
+        err => {
+          alert('an error occurred with image upload');
+        });
+
 
   }
 

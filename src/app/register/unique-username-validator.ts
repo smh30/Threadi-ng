@@ -22,7 +22,7 @@ export function UniqueUsernameValidator(usernameService: UsernameService): Async
     return usernameService.getUserByUsername(control.value).pipe(map(
       res => {
         //if something returned ie the name exists, return the UsernameTaken error
-         return res  ? {"UsernameTaken": true} : null;
+         return res.username === control.value  ? {"UsernameTaken": true} : null;
         // return {"UsernameTaken": true};
       }
     ))

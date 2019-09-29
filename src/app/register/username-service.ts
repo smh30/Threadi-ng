@@ -1,6 +1,7 @@
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {User} from "../projects/model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,6 @@ export class UsernameService {
   // isUsernameTaken: (username: string) => Observable<boolean>
 
   getUserByUsername(username: string): Observable<any>{
-    return this.http.get('https://localhost:8443/users/checkUsername/'+username);
+    return this.http.get<User>('https://localhost:8443/users/byUsername/'+username);
   }
 }

@@ -1,19 +1,23 @@
-<div class="container">
-<h2>{{project.title}}</h2>
-<p>Project listed by: <strong>{{project.creator.username}}</strong>. Contact them at {{project.creator.email}}</p>
-<p style="white-space: pre-line">{{project.description}}</p>
-<p>{{project.type}}</p>
-<p>Created by: {{project.creator.username}}</p>
-<img *ngIf="project.projectImage!=null" src="data:image/png;base64,{{project.projectImage}}"
-class="">
+<!--https://stackoverflow.com/questions/40796683/dont-load-page-yet-until-data-are-all-retrieved-from-the-service??-->
+<div id="project-page" *ngIf="project" class="p-2">
+  <h2>{{project.title}}</h2>
+  <img *ngIf="project.projectImage!=null" src="data:image/png;base64,{{project.projectImage}}"
+       class="m-2">
+  <p>{{project.type}} project listed by <strong>{{project.creator.username}}</strong>. Contact them at
+    {{project.creator.email}}</p>
+  <p style="white-space: pre-line">{{project.description}}</p>
+
+
 
   <div id="buttons" class="align-bottom">
-<button *ngIf="project.creator.username==loggedInUser"
-        class="btn btn-warning m-2" (click)="deleteProject(project)">Delete Project</button>
+    <button *ngIf="project.creator.username==loggedInUser"
+            class="btn btn-warning m-2" (click)="deleteProject(project)">Delete Project
+    </button>
 
-<button *ngIf="project.creator.username==loggedInUser"
-        class="btn btn-warning m-2" (click)="editProject(project)">Edit Project</button>
+    <button *ngIf="project.creator.username==loggedInUser"
+            class="btn btn-warning m-2" (click)="editProject(project)">Edit Project
+    </button>
 
-<button class="btn btn-primary m-2" (click)="return()">return to projects list</button>
-</div>
+    <button class="btn btn-primary m-2" (click)="return()">return to projects list</button>
+  </div>
 </div>

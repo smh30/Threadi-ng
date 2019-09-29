@@ -4,9 +4,11 @@
 }
 
 img {
-  position: absolute;
   top: 20px;
   right: 20px;
+float: right;
+  max-width: 300px;
+  border: 2px solid rgb(221, 209, 182);
 }
 
 .container {

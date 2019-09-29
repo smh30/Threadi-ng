@@ -15,7 +15,6 @@ export class SearchComponent implements OnInit {
   searchParams = {
     searchText: "",
     searchType: "",
-    searchLocation: ""
   };
   isDisplayed:boolean = false;
 
@@ -39,7 +38,6 @@ export class SearchComponent implements OnInit {
   clearParams(){
     this.searchParams.searchType ="";
     this.searchParams.searchText ="";
-    this.searchParams.searchLocation ="";
     this.searchEvent.emit(this.searchParams);
   }
 
