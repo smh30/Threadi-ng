@@ -1,5 +1,7 @@
 <div class="p-4">
-  <div *ngIf='message!=""' class="error alert-danger">{{message}}</div>
+  <!--displays an error message if one exists -->
+  <div *ngIf='message!=""' class="alert-danger">{{message}}</div>
+
   <form [formGroup]="form">
 
     <fieldset>
@@ -10,16 +12,15 @@
       </div>
 
       <div class="form-field">
-        <label>Password:</label>
-        <input type="password" required class="form-control" name="password" formControlName="password">
+        <label for="password">Password:</label>
+        <input type="password" id="password" required class="form-control" name="password" formControlName="password">
       </div>
     </fieldset>
+
     <div class="form-buttons">
       <button class="button btn btn-primary"
               (click)="login()">Login</button>
     </div>
-
-
 
   </form>
 

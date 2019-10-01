@@ -4,7 +4,10 @@
 
 .nav-item {
   padding-left: 20px;
+}
 
+.navbar-right {
+  margin-right: 40px;
 }
 
 .navbar-brand {

@@ -1,41 +1,41 @@
+<!--The below link was used when the standard bootstrap collapsable navbar didn't work
+with angular. Added the toggleNavbar() method instead-->
 <!--https://stackoverflow.com/questions/45951341/cant-toggle-navbar-in-bootstrap-4-in-angular-->
 <nav class="navbar pl-5 sticky-top navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink="/">Threadi</a>
-  <button class="navbar-toggler" type="button" (click)="toggleNavbar()" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarTogglerDemo01" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()" [attr.aria-expanded]="navbarOpen"
+          aria-controls="navbarTogglerDemo01" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01" [ngClass]="{ 'show': navbarOpen }">
 
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <!--use 'routerLink' rather than 'href'-->
-        <a class="nav-link" routerLink="/projects" (click)="toggleNavbar()">Projects <span class="sr-only">(current)</span></a>
-      </li>
-      <li  *ngIf="loginService.isLoggedIn()" class="nav-item">
-        <a  class="nav-link"  (click)="toggleNavbar()"
-         routerLink="/list-project">List a Project</a>
-      </li>
-
-      <li  *ngIf="!loginService.isLoggedIn()" class="nav-item">
-        <a  class="nav-link" (click)="toggleNavbar()" routerLink="/login">Login</a>
-      </li>
-      <li  *ngIf="!loginService.isLoggedIn()" class="nav-item">
-        <a  class="nav-link" (click)="toggleNavbar()" routerLink="/register">Register</a>
+        <!--use 'routerLink' rather than 'href', since the links should only open in the router outlet
+        below the navbar, rather than directing to an entirely new page-->
+        <a class="nav-link" routerLink="/projects" (click)="toggleNavbar()">Projects <span
+          class="sr-only">(current)</span></a>
       </li>
       <li *ngIf="loginService.isLoggedIn()" class="nav-item">
-        <a  class="nav-link" (click)="toggleNavbar()"  routerLink="/logout">Logout</a>
+        <a class="nav-link" (click)="toggleNavbar()"
+           routerLink="/list-project">List a Project</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">....</a>
+
+      <li *ngIf="!loginService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" (click)="toggleNavbar()" routerLink="/login">Login</a>
       </li>
-      <li class="nav-item">
-      <span  class="navbar-text">Logged in user= {{loginService.getLoggedInUser()}}</span>
+      <li *ngIf="!loginService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" (click)="toggleNavbar()" routerLink="/register">Register</a>
+      </li>
+      <li *ngIf="loginService.isLoggedIn()" class="nav-item">
+        <a class="nav-link" (click)="toggleNavbar()" routerLink="/logout">Logout</a>
       </li>
     </ul>
-    <!--todo get nav to auto collapse when option selected-->
-    <!--<form class="form-inline my-2 my-lg-0">-->
-      <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-      <!--<button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->
-    <!--</form>-->
+    <ul class="navbar-nav navbar-right">
+      <li class="nav-item">
+        <span class="navbar-text">Welcome, {{loginService.getLoggedInUser()}}</span>
+      </li>
+    </ul>
+
   </div>
 </nav>

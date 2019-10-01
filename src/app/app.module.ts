@@ -11,7 +11,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { NewProjectComponent } from './new-project/new-project.component';
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { FilterProjectsByTextPipe } from './shared/filter-projects-byText.pipe';
 import { LoginComponent } from './login/login.component';
@@ -23,8 +22,6 @@ import { ProjectComponent } from './projects/project/project.component';
 import { SingleProjectPageComponent } from './single-project-page/single-project-page.component';
 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { NameEditorComponent } from './name-editor/name-editor.component';
-import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 // import { CheckPasswordDirective } from './register/check-password.directive';
 
 //todo split out routes to its own class/file
@@ -63,19 +60,9 @@ const appRoutes : Routes = [
     component: ProjectsComponent,
     pathMatch: 'full'
   },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-  },
-  //todo delte this debugging thing
-  {
-    path: 'test',
-    component: NameEditorComponent,
-  },
-  {
-    path: "test2",
-    component: ProfileEditorComponent
-  },
+
+
+
   {
     path: 'login',
     component: LoginComponent
@@ -97,7 +84,6 @@ const appRoutes : Routes = [
     ProjectsComponent,
     NotFoundComponent,
     NewProjectComponent,
-    ProfileComponent,
     SearchComponent,
     FilterProjectsByTextPipe,
     LoginComponent,
@@ -105,12 +91,8 @@ const appRoutes : Routes = [
     LogoutComponent,
     FilterProjectsByTypePipe,
     ProjectComponent,
-    //ProjectDetailsComponent,
     SingleProjectPageComponent,
-    // ProjectListSidebarComponent,
-    NameEditorComponent,
-    ProfileEditorComponent,
-    // CheckPasswordDirective,
+
   ],
   imports: [
     BrowserModule,

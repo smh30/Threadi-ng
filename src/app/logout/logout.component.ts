@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 
+
+/**
+ * Logs the user out
+ *
+ * On initialisation, removes all JWT and other keys from localstorage
+ * and navigates to homepage
+ */
 @Component({
   selector: 'app-logout',
-  templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.css']
+  templateUrl: './logout.component.html'
 })
 export class LogoutComponent implements OnInit {
 

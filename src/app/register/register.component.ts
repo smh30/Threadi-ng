@@ -104,7 +104,7 @@ export class RegisterComponent implements OnInit {
         this.authService.login(user.username, user.password).subscribe(
           () => {
             localStorage.setItem('username', user.username);
-            this.loginService.storeUserId(user.username);
+            this.loginService.storeUserNameAndId(user.username);
             console.log("User is logged in");
             this.router.navigateByUrl('/');
           }

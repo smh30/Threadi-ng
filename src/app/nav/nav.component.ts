@@ -8,7 +8,8 @@ import {AuthService} from "../shared/authentication.service";
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  public isCollapsed = true;
+
+  //whether or not the nav menu is open on small screens
   navbarOpen = false;
 
   constructor(private loginService:AuthService) {
