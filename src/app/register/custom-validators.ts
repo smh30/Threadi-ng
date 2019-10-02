@@ -28,4 +28,6 @@ export class CustomValidators {
       control.get('password2').setErrors({NoPasswordMatch: true});
     }
   }
+
+
 }

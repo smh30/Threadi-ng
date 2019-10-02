@@ -1,19 +1,24 @@
 <div class="p-4">
   <p class="align-self-center">Threadi connects people looking for handcrafted clothing with creators with the skills to make their dreams come
     true!</p>
+
+  <!--Includes the search component-->
   <app-search (searchEvent)="filterProjects($event)"></app-search>
 </div>
+
+
 <div class="row p-4 flex-container">
-  <!--project cards -->
-  <app-project *ngFor="let project of projects | filterProjectsByType: searchText: searchType: searchLocation"
+  <!--project cards - for each project in the list, create a Project component. If filters have been applied in the search,
+  component, filter the projects according to those-->
+  <app-project *ngFor="let project of projects | filterProjects: searchText: searchType"
                [project]="project"
-               (projectDeleted)="deleteProject($event)"
                class="">
 
   </app-project>
-  <!--todo add an 'if no projects' message-->
+  <div *ngIf="projects.length==0">
+    No projects to display. Try creating one!
+  </div>
 
 </div>
 
-<!--<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>-->
-<!--discovery 12/8: if there's a null returned in a project then the projects after that won't show up properly either-->
+

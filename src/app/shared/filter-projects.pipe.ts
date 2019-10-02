@@ -2,12 +2,12 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {Project} from "../projects/model/project";
 
 @Pipe({
-  name: 'filterProjectsByType',
+  name: 'filterProjects',
 
 })
-export class FilterProjectsByTypePipe implements PipeTransform {
+export class FilterProjectsPipe implements PipeTransform {
 
-  transform(projects: Project[], searchText: string, searchType: string, searchLocation: string): Project[] {
+  transform(projects: Project[], searchText: string, searchType: string): Project[] {
 
 
     console.log("in transform type="+ searchType +", text  ="+ searchText );

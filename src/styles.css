@@ -1,3 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import url(~bootstrap/dist/css/bootstrap.min.css);
 @import url(~font-awesome/css/font-awesome.css);
+
+.myButton {
+  background-color: #cb7382;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.myButton:hover {
+  background-color: #b45362;
+}

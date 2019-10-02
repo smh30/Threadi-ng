@@ -12,12 +12,11 @@ import { NewProjectComponent } from './new-project/new-project.component';
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SearchComponent } from './search/search.component';
-import { FilterProjectsByTextPipe } from './shared/filter-projects-byText.pipe';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor} from "./shared/auth-interceptor";
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
-import { FilterProjectsByTypePipe } from './shared/filter-projects-by-type.pipe';
+import { FilterProjectsPipe } from './shared/filter-projects.pipe';
 import { ProjectComponent } from './projects/project/project.component';
 import { SingleProjectPageComponent } from './single-project-page/single-project-page.component';
 
@@ -85,11 +84,10 @@ const appRoutes : Routes = [
     NotFoundComponent,
     NewProjectComponent,
     SearchComponent,
-    FilterProjectsByTextPipe,
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
-    FilterProjectsByTypePipe,
+    FilterProjectsPipe,
     ProjectComponent,
     SingleProjectPageComponent,
 

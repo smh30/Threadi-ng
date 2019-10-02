@@ -143,8 +143,9 @@ export class NewProjectComponent implements OnInit {
     if (files.length === 0) {
       return;
     }
-    let mimeType = files[0].type;
+
     //if the file type is not an image, show an alert
+    let mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
       alert("Only image file formats are supported");
       return;
@@ -152,12 +153,12 @@ export class NewProjectComponent implements OnInit {
 
     //get the file from the theoretical array of files provided by the file upload control
     this.selectedImageFile = files[0];
-
     this.imagePath = files;
 
     //read the file as data
     let reader = new FileReader();
     reader.readAsDataURL(this.selectedImageFile);
+
     //set the imgURL to the data read from the file, which will then be displayed on the page.
     reader.onload = (_event) => {
       this.imgURL = reader.result;

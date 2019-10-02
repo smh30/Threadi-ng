@@ -63,11 +63,11 @@
 
 <!--The button shown on the page depends on if a new project is being created or a project is being
 edited, both in the text displayed and the method called on click -->
-    <button *ngIf="!editMode" type="submit" [disabled]="projectForm.invalid" class="btn btn-success">
+    <button *ngIf="!editMode" type="submit" [disabled]="projectForm.invalid" class="myButton">
       Create my project
     </button>
 
-    <button *ngIf="editMode" type="button" [disabled]="projectForm.invalid" (click)="editProject()" class="btn btn-success">
+    <button *ngIf="editMode" type="button" [disabled]="projectForm.invalid" (click)="editProject()" class="myButton">
       Save my changes
     </button>
   </form>
