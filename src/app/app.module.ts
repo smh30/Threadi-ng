@@ -21,7 +21,7 @@ import { ProjectComponent } from './projects/project/project.component';
 import { SingleProjectPageComponent } from './single-project-page/single-project-page.component';
 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-// import { CheckPasswordDirective } from './register/check-password.directive';
+
 
 //todo split out routes to its own class/file
 const appRoutes : Routes = [

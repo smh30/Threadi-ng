@@ -1,20 +1,24 @@
+<!--This is the main page component, which includes the search component and the list
+of individual project components-->
 <div class="p-4">
   <p class="align-self-center">Threadi connects people looking for handcrafted clothing with creators with the skills to make their dreams come
     true!</p>
 
-  <!--Includes the search component-->
-  <app-search (searchEvent)="filterProjects($event)"></app-search>
+  <!--Includes the search component. When the search component emits an event (when a search is
+  submitted) the event will be passed to the setSearchParams method-->
+  <app-search (searchEvent)="setSearchParams($event)"></app-search>
 </div>
 
 
 <div class="row p-4 flex-container">
   <!--project cards - for each project in the list, create a Project component. If filters have been applied in the search,
-  component, filter the projects according to those-->
+  component, filter the project list according to those first-->
   <app-project *ngFor="let project of projects | filterProjects: searchText: searchType"
                [project]="project"
                class="">
 
   </app-project>
+
   <div *ngIf="projects.length==0">
     No projects to display. Try creating one!
   </div>

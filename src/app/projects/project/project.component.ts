@@ -3,6 +3,9 @@ import {Project} from "../model/project";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 
+/**
+ * Controller for the individual project card component
+ */
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -10,33 +13,26 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ProjectComponent implements OnInit {
 
+  /*
+  When each instance of this component is created it receives a project as input
+   */
   @Input() project: Project;
 
-  loggedInUser: string;
 
-
-  @Output() projectDeleted: EventEmitter<Project> = new EventEmitter<Project>();
-
-
-  constructor(private router: Router,
-              private http: HttpClient) { }
+  /*
+  Constructor includes dependency on the Router (so that the component can redirect
+  to another page)
+   */
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
-    this.loggedInUser = localStorage.getItem("username");
-    //console.log("in project, list length=" + this.projects.length)
   }
 
-  viewProject(){
+  viewProject() {
+    this.router.navigateByUrl("/project/" + this.project.projectID,);
 
-     this.router.navigateByUrl("/project/"+this.project.projectID, );
-    //  console.log("navigating to project id: "+ this.project.projectID);
-    // this.router.navigate(["/project"], {state: {data: {project:this.project}}})
   }
 
-  // deleteProject(){
-  //   console.log("in projecct, deleting: "+ this.project.projectID);
-  //   this.projectDeleted.emit(this.project);
-  //   console.log("emitted")
-  // }
 
 }

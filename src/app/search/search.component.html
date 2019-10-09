@@ -1,49 +1,67 @@
+<!-- Template for the search component which is included in the main page-->
+
+<!--Button to expand the search tools by calling showSearch method-->
 <button *ngIf="!isDisplayed" class="myButton" (click)="showSearch()">Search for projects</button>
+
+<!--Contents of the search tool, which is hidden or displayed based on the
+isDisplayed variable in the controller-->
 <div [hidden]="!isDisplayed" id="searchTools">
 
-<form>
-  <div class="form-group">
-    Filter projects by type:
-    <label for="knit" *ngIf="searchParams.searchType==='knitting'" class="highlight"><img src="assets/img/knitting.svg" class="icon"/>Knitting</label>
-    <label for="knit" *ngIf="searchParams.searchType!=='knitting'"><img src="assets/img/knitting.svg" class="icon"/>Knitting</label>
-    <input type="radio"
-           name="type"
-           id="knit"
-           value="knitting"
-           hidden
-           [(ngModel)]="searchParams.searchType"
-    >
-    <label for="sew" *ngIf="searchParams.searchType==='sewing'" class="highlight"><img src="assets/img/suit.svg" class="icon"/>Sewing</label>
-    <label for="sew" *ngIf="searchParams.searchType!=='sewing'"><img src="assets/img/suit.svg" class="icon"/>Sewing</label>
-    <input type="radio"
-           name="type"
-           id="sew"
-           value="sewing"
-           hidden
-           [(ngModel)]="searchParams.searchType">
+  <form>
 
-  </div>
+    <!--Form controls for selecting the project type - the radio buttons are hidden, and instead
+    the label is coloured by adding the "highlight" class if it option is selected-->
+    <div class="form-group">
+      Filter projects by type:
+      <label for="knit" *ngIf="searchParams.searchType==='knitting'" class="highlight px-2"><img
+        src="assets/img/knitting.svg" class="icon"/>Knitting</label>
+      <label for="knit" *ngIf="searchParams.searchType!=='knitting'" class="px-2"><img src="assets/img/knitting.svg"
+                                                                                       class="icon"/>Knitting</label>
+      <input type="radio"
+             name="type"
+             id="knit"
+             value="knitting"
+             hidden
+             [(ngModel)]="searchParams.searchType"
+      >
+      <label for="sew" *ngIf="searchParams.searchType==='sewing'" class="highlight px-2"><img src="assets/img/suit.svg"
+                                                                                              class="icon"/>Sewing</label>
+      <label for="sew" *ngIf="searchParams.searchType!=='sewing'" class="px-2"><img src="assets/img/suit.svg"
+                                                                                    class="icon"/>Sewing</label>
+      <input type="radio"
+             name="type"
+             id="sew"
+             value="sewing"
+             hidden
+             [(ngModel)]="searchParams.searchType">
+
+    </div>
+
+<!--Input field for searching by text-->
+    <label for="search">Search by text</label>
+    <input type="text"
+           class="form-control"
+           id="search"
+           name="search"
+           [(ngModel)]="searchParams.searchText"
+    />
 
 
+    <!--button to submit the form, will call the submitSearch method in the controller-->
+    <button type="submit"
+            class="btn btn-dark m-1"
+            (click)="submitSearch()"
+    >Search
+    </button>
 
+    <!--button to clear all search parameters and restore the full list of projects-->
+    <button type="button"
+            class="btn btn-dark m-1"
+            (click)="clearParams()"
+    >Remove filter
+    </button>
 
-  <label for="search">Search by text</label>
-  <input type="text"
-         class="form-control"
-         id="search"
-         name="search"
-         [(ngModel)]="searchParams.searchText"
-         />
-  <button type="submit"
-         class="btn btn-dark m-1"
-         (click)="submitSearch()"
-        >Search</button>
-  <button type="button"
-          class="btn btn-dark m-1"
-          (click)="clearParams()"
-  >Remove filter</button>
-
-</form>
+  </form>
 
 </div>
 <button *ngIf="isDisplayed" class="myButton" (click)="showSearch()">Hide search tools</button>

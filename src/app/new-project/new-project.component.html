@@ -10,7 +10,7 @@
              maxlength="50"
              required
              [(ngModel)]="model.title"
-      #title="ngModel"/>
+             #title="ngModel"/>
     </div>
 
 
@@ -31,7 +31,7 @@
              class="radiobutton ml-5"
              id="sew"
              value="sewing"
-             [(ngModel)]="model.type" />
+             [(ngModel)]="model.type"/>
       <label for="sew"><img src="assets/img/suit.svg" class="icon"/>Sewing</label>
     </div>
     <div class="form-group">
@@ -53,7 +53,7 @@
            #file
            accept="image/*">
 
-<!-- when an image is selected, its preview is shown using the technique found at this link -->
+    <!-- when an image is selected, its preview is shown using the technique found at this link -->
     <!--https://www.talkingdotnet.com/show-image-preview-before-uploading-using-angular-7/-->
     <img [src]="imgURL" *ngIf="imgURL" height="200">
     <!--If a project is being edited which has an image associated with it, show that image unless
@@ -61,8 +61,8 @@
     <img src="data:image/png;base64,{{imagePassedIn}}" *ngIf="imagePassedIn && !imgURL" height="200">
 
 
-<!--The button shown on the page depends on if a new project is being created or a project is being
-edited, both in the text displayed and the method called on click -->
+    <!--The button shown on the page depends on if a new project is being created or a project is being
+    edited, both in the text displayed and the method called on click -->
     <button *ngIf="!editMode" type="submit" [disabled]="projectForm.invalid" class="myButton">
       Create my project
     </button>

@@ -1,21 +1,27 @@
+<!--An individual project card-->
 <div class="threadi-card card m-1">
 
+  <!--if the project has an image set, show it, otherwise show the default image-->
   <div class="thumbnail">
-    <img *ngIf="project.projectImage!=null" class="card-image" src="data:image/png;base64,{{project.projectImage}}" alt="Project image">
-    <img *ngIf="project.projectImage==null" class="card-image" src="assets/img/placeholder.jpg" alt="Default project image">
+    <img *ngIf="project.projectImage!=null" class="card-image" src="data:image/png;base64,{{project.projectImage}}"
+         alt="Project image">
+    <img *ngIf="project.projectImage==null" class="card-image" src="assets/img/placeholder.jpg"
+         alt="Default project image">
+  </div>
 
-</div>
   <div class="card-body">
     <h5 class="card-title">{{project.title}}</h5>
-    <!--<p class="card-text">{{project.creator.username}}, {{project.creator.userId}}</p>-->
+
+    <!--show the appropriate project type icon depending on the project's type-->
     <img *ngIf="project.type==='knitting'" src="assets/img/knitting.svg" class="icon">
     <img *ngIf="project.type==='sewing'" src="assets/img/suit.svg" class="icon">
-    <!--<p class="card-text">{{project.description}}</p>-->
+
   </div>
-<div class="card-footer text-center">
-    <button class="btn btn-dark "  (click)="viewProject()">See more details</button>
+
+  <!--button to run the viewProject method (defined in the project component controller)
+  which will redirect to the individual project page-->
+  <div class="card-footer text-center">
+    <button class="btn btn-dark " (click)="viewProject()">See more details</button>
   </div>
-    <!--<button *ngIf="project.creator.username==loggedInUser"-->
-       <!--href="#"  class="btn btn-warning" (click)="deleteProject(project)">Delete Project</button>-->
 
 </div>

@@ -1,65 +1,36 @@
 import {
   AbstractControl,
-  AsyncValidator,
-  AsyncValidatorFn, FormControl,
-  NG_VALIDATORS,
+  AsyncValidatorFn,
   ValidationErrors,
-  ValidatorFn
 } from "@angular/forms";
-import {Directive, Injectable, Input} from "@angular/core";
-import {Observable, timer} from "rxjs";
-//import {UsernameService} from "./username-service";
-import {catchError, map, switchMap} from "rxjs/operators";
-import {HttpClient} from "@angular/common/http";
-import {Validator} from "codelyzer/walkerFactory/walkerFn";
-import {User} from "../projects/model/user";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 import {UsernameService} from "./username-service";
 
-// @Injectable({providedIn: 'root'})
+/**
+ * A custom validator used to check whether a user's desired username already exists in the database. This is
+ * implemented as an AsyncValidator because it involves making an HTTP call, so shouldn't be attempted until
+ * other validators on the field pass to save unnecessary calls.
+ *
+ * @param usernameService - the UsernameService class is injected so it is available
+ * @constructor
+ */
 export function UniqueUsernameValidator(usernameService: UsernameService): AsyncValidatorFn{
-  //console.log("in the validator");
+
+
   return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
+    //use the usernameService's method to make the http call to check the username. This method will return an
+    //Observable - pipe this into a map function to handle the result.
     return usernameService.getUserByUsername(control.value).pipe(map(
       res => {
-        //if something returned ie the name exists, return the UsernameTaken error
+        //if the username returned matches the one entered in
+        // the form, ie the name exists, return the UsernameTaken error
          return res.username === control.value  ? {"UsernameTaken": true} : null;
-        // return {"UsernameTaken": true};
+
       }
     ))
   }
 
-
-
-
-
-
-  // validate(ctrl: AbstractControl):
-  //   Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
-  //   return this.usernameService.isUsernameTaken(ctrl.value).pipe(
-  //     map(isTaken => (isTaken ? {uniqueUsername: true} : null)),
-  //     catchError(() => null)
-  //   );
-  // }
-
-  // validate(control: AbstractControl): ValidationErrors | null {
-  //   return undefined;
-  // }
-
-
 }
-//
-// @Directive({
-//   selector: '[appCheckUsername]',
-//   providers: [
-//     {provide: NG_VALIDATORS,
-//       useExisting: forwardRef(()=> UniqueUsernameValidator),
-//       multi: true}]
-// })
-// export class UniqueUsernameValidatorDirective {
-//   constructor(private validator: UniqueUsernameValidator){}
-//
-//   validate(control: AbstractControl){
-//     this.validator.usernameValidator();
-//   }
-// }
+
 
