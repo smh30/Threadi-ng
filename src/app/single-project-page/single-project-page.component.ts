@@ -1,85 +1,134 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Project} from "../projects/model/project";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 
+/**
+ * Controller for the display single project page
+ */
 @Component({
   selector: 'app-single-project-page',
   templateUrl: './single-project-page.component.html',
   styleUrls: ['./single-project-page.component.css']
 })
 export class SingleProjectPageComponent implements OnInit {
+
+  //A Project object which is to be displayed on the page
   project: Project;
+
+  //Stores the id of the project to be displayed (which is passed in via url)
   projectID: string;
+
+  //The username of the logged in user
   loggedInUser: string;
 
-  //https://medium.com/better-programming/angular-6-url-parameters-860db789db85
 
+
+  /**
+   * Constructor injection of the 3 required items
+   * @param route: used to get the project Id from the URL /route
+   * @param http: used to make http call to get project information
+   * @param router: to redirect to other pages when doing delete, edit, or return to main page
+   */
   constructor(private route: ActivatedRoute,
               private http: HttpClient,
               private router: Router) {
 
   }
 
+  /**
+   * When this component is initialised, get the 'id' parameter from the URL. This parameter is
+   * identified in the Routes defined in the app.component.ts class as 'project/:id'.
+   * (Thanks to https://medium.com/better-programming/angular-6-url-parameters-860db789db85)
+   *
+   * Use the recovered ID to fetch the data for that project
+   */
   ngOnInit() {
+    //Get the id parameter from the URL route
     this.projectID = this.route.snapshot.paramMap.get("id");
-    console.log("project id in single comp: "+ this.projectID);
 
-    this.getSingleProject(this.projectID, ()=>{
+    //Pass the ID to the getSingleProject method, and when this method returns fetch the logged
+    //in username from localStorage and set it in this controller.
+    this.getSingleProject(this.projectID, () => {
       this.loggedInUser = localStorage.getItem("username");
     });
 
 
   }
 
-  getSingleProject(id: string, callback){
-    let url = "https://localhost:8443/projects/"+ id;
+  /**
+   * Makes a http call to get the details for the specified project, then performs the
+   * callback function which was passed in
+   *
+   * @param id
+   * @param callback
+   */
+  getSingleProject(id: string, callback) {
 
+    //The url to which this method will call
+    let url = "https://localhost:8443/projects/" + id;
 
+    //Make a GET request to the above URL
     this.http.get<Project>(url).subscribe(
-      res=>{
-        console.log("got project");
+      res => {
+        //If successful, set the result into the project variable of this component
         this.project = res;
         callback();
       },
       err => {
-        console.log("yup surely an error with getting the project")
+        alert("Sorry, an error occurred when fetching the project information. Please" +
+          "try again.")
       }
     )
 
   }
 
-return(){
+  /**
+   * Called when the "return to projects list" button is selected. Redirects to the home page
+   */
+  return() {
     this.router.navigateByUrl("/")
-}
+  }
 
+  /**
+   * Called when the "Delete" button is selected. Checks that the user is sure they want to
+   * delete the project, then makes an HTTP delete request to delete it.
+   * @param project: the project to be deleted
+   */
+  deleteProject(project: Project) {
 
+    //Confirm that the user is sure
+    if (confirm("Are you sure you want to delete this project?")) {
 
-   deleteProject(project: Project){
-    console.log("in project view component");
-    console.log("deleting:" +project.projectID);
-    if(confirm("are you sure you want to delete this project?")){
+      //defines the URL for deleting the project
       let url = "https://localhost:8443/projects/" + project.projectID + "/";
+
+      //Make the http DELETE request
       this.http.delete<Project[]>(url).subscribe(
         res => {
-          // let indexOfProject = this.projects.indexOf(project);
-          // this.projects.splice(indexOfProject, 1);
+          //if successful, return to the main page
           this.router.navigateByUrl("/")
         },
         err => {
-          alert("an error occurred while deleting the project")
+          //if failed, alert the user
+          alert("An error occurred while deleting the project")
         }
       )
-
-
     }
   }
 
-  editProject(project:Project){
-    alert("gonna edit the project "+ project.projectID);
-    //pass the project info to the creat project page
-    this.router.navigate(["/list-project"], {state: {data: {project: this.project}}});
+  /**
+   * Called when the edit project button is selected. Sets the current project's data into the
+   * Router's state object, then redirects to the "list project" page (the page used to create
+   * new projects).  Because the state contains a project, the "list project" page will
+   * be configured to edit mode.
+   *
+   * @param project: the project to be edited
+   */
+  editProject(project: Project) {
 
+    //pass the project info to the "list project" page and navigate there
+    this.router.navigate(["/list-project"], {state: {data: {project: this.project}}});
 
 
   }

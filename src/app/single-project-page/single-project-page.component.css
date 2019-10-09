@@ -1,12 +1,7 @@
-#page-row{
-  height: 80vh;
-
-}
-
 img {
   top: 20px;
   right: 20px;
-float: right;
+  float: right;
   max-width: 300px;
   border: 2px solid rgb(221, 209, 182);
 }

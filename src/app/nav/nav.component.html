@@ -32,7 +32,7 @@ with angular. Added the toggleNavbar() method instead-->
       </li>
     </ul>
     <ul class="navbar-nav navbar-right">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="loginService.isLoggedIn()" >
         <span class="navbar-text">Welcome, {{loginService.getLoggedInUser()}}</span>
       </li>
     </ul>

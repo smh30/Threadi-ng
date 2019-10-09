@@ -1,14 +1,18 @@
-<app-nav></app-nav>
-<div class="background overflow-auto" >
-     <!--[@routeAnimations]="prepareRoute(outlet)" >-->
-<div class="container " >
-<!--<div >-->
-  <router-outlet >
-    <!--#outlet="outlet">-->
+<!--Template for the overall structure of the app-->
 
-  </router-outlet>
-</div>
-<!--</div>-->
+<!--The navigation component is included first-->
+<app-nav></app-nav>
+
+<!--A div which contains the background image-->
+<div class="background overflow-auto">
+
+  <div class="container ">
+
+    <!--Other pages of the app are displayed here by the router-->
+    <router-outlet>
+
+    </router-outlet>
+  </div>
 
 
 </div>

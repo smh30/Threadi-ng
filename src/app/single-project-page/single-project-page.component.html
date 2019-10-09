@@ -1,15 +1,33 @@
-<!--https://stackoverflow.com/questions/40796683/dont-load-page-yet-until-data-are-all-retrieved-from-the-service??-->
+<!--Template for the page for displaying details of a single project-->
+
+<!--The *ngIf on this outer div means that the div and its contents won't load until the
+project model in the controller is populated (i.e. until after the Http call has returned -
+otherwise console errors are created by trying to access properties of an undefined object
+throughout this page. Thanks to:
+https://stackoverflow.com/questions/40796683/dont-load-page-yet-until-data-are-all-retrieved-from-the-service??
+
+Bootstrap clearfix class is used so that div expands to contain the project image if
+one exists-->
 <div id="project-page" *ngIf="project" class="p-2 clearfix">
+
   <h2>{{project.title}}</h2>
+
+  <!--If an image exists (is not null), display it-->
   <img *ngIf="project.projectImage!=null" src="data:image/png;base64,{{project.projectImage}}"
        class="m-2">
+
   <p>{{project.type}} project listed by <strong>{{project.creator.username}}</strong>. Contact them at
     {{project.creator.email}}</p>
+
+  <!--the style on this paragraph means that line breaks in the project description are
+  retained -->
   <p style="white-space: pre-line">{{project.description}}</p>
 
 
-
   <div id="buttons" class="align-bottom">
+    <!--The edit and delete buttons will only appear if the project creator is the
+    currently logged in user. The project object is passed to the relevant (delete or edit)
+    method-->
     <button *ngIf="project.creator.username==loggedInUser"
             class="btn btn-warning m-2" (click)="deleteProject(project)">Delete Project
     </button>
@@ -18,6 +36,7 @@
             class="btn btn-warning m-2" (click)="editProject(project)">Edit Project
     </button>
 
+    <!--This button is always available-->
     <button class="btn btn-primary m-2" (click)="return()">return to projects list</button>
   </div>
 </div>
